@@ -1,0 +1,109 @@
+<app-top-bar></app-top-bar>
+<div class="breadcrumb-area gray-bg-7">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <ul>
+                <li><a href="/">Inicio</a></li>
+                <li class="text-red">Contacto </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="contact-us pt-60 pb-50"
+    style="background-image: url('../../../../assets/img/fondo2.jpg'); width: 100%; background-position: center; background-repeat: no-repeat; background-size: cover;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="contact-page-title mb-40">
+                    <h1>
+                        Hola,
+                        <br>
+                        Así puedes contactarnos
+                    </h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <ul class="contact-tab-list nav">
+                    <li><a href="#contact-address" data-toggle="tab">Contactos</a></li>
+                    <li><a href="#contact-form-tab" data-toggle="tab">Escríbenos</a></li>
+                    <li><a class="active" href="#store-location" data-toggle="tab">Ubicación</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-8">
+                <div class="tab-content tab-content-contact">
+                    <div id="contact-address" class="tab-pane fade row d-flex">
+                        <div class="col-lg-4 col-md-4">
+                            <div class="contact-information">
+                                <h4>Dirección</h4>
+                                <p>{{ dtsEmpresa.direccionSucursal }}</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <div class="contact-information mrg-top-sm">
+                                <h4>Teléfonos</h4>
+                                <p>
+                                    <a href="#">(593) {{ dtsEmpresa.telefonoSucursal }}</a>
+                                    <a href="#">(593) {{ 992943174 }}</a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <div class="contact-information mrg-top-sm">
+                                <h4>Web</h4>
+                                <p>
+                                    <a href="#">{{ dtsEmpresa.email }}</a>
+                                    <a href="/">www.remolkar.com</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="contact-form-tab" class="tab-pane fade row d-flex">
+                        <div class="col">
+                            <form id="contact-form" action="assets/mail.php" method="post">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="contact-form-style mb-20">
+                                            <input name="name" placeholder="Nombre" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="contact-form-style mb-20">
+                                            <input name="email" placeholder="Correo Electrónico" type="email">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="contact-form-style mb-20">
+                                            <input name="subject" placeholder="Asunto" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="contact-form-style">
+                                            <textarea name="message" placeholder="Mensaje"></textarea>
+                                            <button class="submit" type="submit"
+                                                style="background-color: #df2121; color: #fff;">Enviar Mensaje</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <p class="form-messege"></p>
+                        </div>
+                    </div>
+                    <div id="store-location" class="tab-pane fade row d-flex active show">
+                        <div class="col-12">
+                            <div class="contact-map">
+                                <iframe
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3987.1204076444496!2d-79.92988488524487!3d-2.1071695984639716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMsKwMDYnMjUuOCJTIDc5wrA1NSczOS43Ilc!5e0!3m2!1ses!2sec!4v1605803278412!5m2!1ses!2sec"
+                                    frameborder="0" style="border:0; width: 100%; height: 450px;" allowfullscreen=""
+                                    aria-hidden="false" tabindex="0"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>

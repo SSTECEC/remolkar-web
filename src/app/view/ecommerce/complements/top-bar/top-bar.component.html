@@ -1,0 +1,236 @@
+<header class="header-area"
+  style="background-image: url('../../../../../assets/img/top-bar.jpg'); width: 100%; background-position: center; background-repeat: no-repeat; background-size: cover;">
+  <div class="header-top header-top-color-2 header-top-red pt-10 pb-13 border-bottom-2">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-12">
+         
+        </div>
+        <div class="col-lg-6 col-md-6 col-12">
+          <div class="header-top-right">
+            <ul>
+              <li *ngIf="usuario.token != null">
+                <a><i class="fa fa-user"></i> {{ usuario.resultado.nombre }}</a>
+              </li>
+              <li>
+                <a href="/favoritos"><i class="fa fa-star"></i> {{ idioma.favoritos}} </a>
+              </li>
+              <li *ngIf="usuario.token == null">
+                <a style="cursor: pointer;" (click)="abrirModal(1)"><i class="fa fa-th-list"></i>
+                  {{ idioma.registrar}}</a>
+              </li>
+              <li *ngIf="usuario.token == null">
+                <a style="cursor: pointer;" (click)="abrirModal(2)"><i class="fa fa-sign-in"></i>
+                  {{ idioma.iniciarSesion }}</a>
+              </li>
+              <li *ngIf="usuario.token != null">
+                <a style="cursor: pointer;" (click)="cerrarSesion()"><i class="fa fa-sign-out"></i>
+                  {{ idioma.cerrarSesion }}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="header-middle ptb-40 header-middle-color-5 border-bottom-2">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-12">
+          <div class="logo logo-mrg">
+            <a href="/">
+              <img [src]="urls.conexionImagenes + '/' + dtsEmpresa.logo" alt="" style="width: 110%;">
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-9 col-md-12 col-12">
+          <div class="header-contact-search-wrapper f-right">
+            <div class="header-contact middle-same celular">
+              <div class="header-contact-icon">
+                <i class="pe-7s-headphones"></i>
+              </div>
+              <div class="header-contact-content">
+                <p>Llámanos <br>Soporte: (593) {{ dtsEmpresa.telefonoSucursal }}</p>
+              </div>
+            </div>
+            <div class="header-search middle-same">
+              <form class="header-search-form" [formGroup]="fmrBusqueda" (ngSubmit)="filtrar(fmrBusqueda.value)">
+                <input type="text" formControlName="producto" placeholder="{{ idioma.buscar }}">
+                <button>
+                  <i class="ion-ios-search-strong"></i>
+                </button>
+              </form>
+            </div>
+            <div class="header-cart middle-same">
+              <button class="icon-cart">
+                <i class="pe-7s-shopbag cart-bag"></i>
+                <span class="count-amount">$ {{ generico.formatearNumero(datosCarrito.total,2) }}</span>
+                <i class="ion-chevron-down cart-down"></i>
+                <span class="count-style">{{ datosCarrito.numero }}</span>
+              </button>
+              <div class="shopping-cart-content">
+
+                <ul>
+
+                  <li *ngFor="let carrito of datosCarrito.lstCarrito" class="single-shopping-cart">
+                    <div class="shopping-cart-img">
+                      <a href="/producto/{{carrito.data.idProducto}}"><img
+                          [src]="urls.conexionImagenes + '/' + obtenerImagen(carrito.data.imagen)"
+                          style="width: 80% !important;"></a>
+                    </div>
+                    <div class="shopping-cart-title">
+                      <h4><a class="text-red" href="/producto/{{carrito.data.idProducto}}"
+                          style="font-size: 10px;">{{ acortarNombre(carrito.data.nombre) }}</a>
+                      </h4>
+                      <h6>{{idioma.cantidadAbreviado}}: {{ carrito.cantidad }}</h6>
+                      <span>$ {{ generico.formatearNumero(obtenerTotalItem(carrito.cantidad, carrito.data),2) }}</span>
+                    </div>
+                    <div class="shopping-cart-delete">
+                      <a class="click" (click)="eliminarItemCarrito(carrito.data.idProducto)"><i
+                          class="ion-android-close"></i></a>
+                    </div>
+                  </li>
+
+                </ul>
+
+                <div class="shopping-cart-total">
+                  <h4>{{ idioma.envio }} : <span>$ {{generico.formatearNumero(datosCarrito.envio,2)}}</span></h4>
+                  <h4>{{ idioma.total }} : <span class="shop-total">$
+                      {{ generico.formatearNumero(datosCarrito.total,2) }}</span></h4>
+                </div>
+                <div class="shopping-cart-btn">
+                  <a class="btn-style btn-hover" href="/cart">{{idioma.carrito}}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="header-bottom header-bottom-color-4 theme-bg-3 menu-hover-red">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="logo mobile-logo">
+            <a href="/">
+              <img [src]="urls.conexionImagenes + '/' + dtsEmpresa.logo" alt="" style="width: 60%;">
+            </a>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="mobile-menu-area">
+            <div class="mobile-menu">
+              <nav id="mobile-menu-active">
+                <ul class="menu-overflow">
+                  <li><a href="/"> {{ idioma.inicio }} </a></li>
+                  <li><a href="/productos"> {{ idioma.productos }} </a></li>
+                  <li><a href="/marcas"> {{ idioma.marcas }} </a></li>
+                  <li><a href="/servicios"> Servicios </a></li>
+                  <li><a href="/acerca"> {{ idioma.acerca }} </a></li>
+                  <li><a href="/contacto"> {{ idioma.contacto }} </a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="main-menu main-none">
+        <nav>
+          <ul>
+            <li><a href="/"> {{ idioma.inicio }} </a></li>
+            <li><a href="/productos"> {{ idioma.productos }} </a></li>
+            <li><a href="/marcas"> {{ idioma.marcas }} </a></li>
+            <li><a href="/servicios"> Servicios </a></li>
+            <li><a href="/acerca"> {{ idioma.acerca }} </a></li>
+            <li><a href="/contacto"> {{ idioma.contacto }} </a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="modal fade" id="LoginModal" tabindex="-1" role="dialog" aria-labelledby="LoginModalTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="LoginModalTitle" style="font-weight: bold;">Inicia Sesión</h5>
+      </div>
+      <div class="modal-body" style="margin: 0px !important; padding: 0px !important;">
+        <div id="lg1" class="tab-pane active">
+          <div class="login-form-container" style="padding: 50px !important;">
+            <div class="login-register-form">
+              <form action="#" method="post">
+                <input type="text" name="email" placeholder="Correo Electrónico" [(ngModel)]="fmrLogin.email">
+                <input type="password" name="contrasena" placeholder="Contraseña" [(ngModel)]="fmrLogin.contrasena">
+                <div class="button-box">
+                  <div class="login-toggle-btn">
+                    <input type="checkbox">
+                    <label>Recuerdame</label>
+                    <a href="#" style="color: #df2121;">Recuperar Contraseña</a>
+                  </div>
+                  <br><br>
+                  <div class="deals-btn" style="float: right;">
+                    <a class="btn-style-2" style="cursor: pointer; color: white;" (click)="iniciarSesion()">
+                      Iniciar
+                    </a>
+                  </div>
+                  <br><br>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="RegisterModal" tabindex="-1" role="dialog" aria-labelledby="RegisterModalTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="RegisterModalTitle" style="font-weight: bold;">Registrate</h5>
+      </div>
+      <div class="modal-body" style="margin: 0px !important; padding: 0px !important;">
+        <div id="lg1" class="tab-pane active">
+          <div class="login-form-container" style="padding: 50px !important;">
+            <div class="login-register-form">
+              <form action="#" method="post">
+
+                <input type="text" name="nombre" placeholder="Nombre" [(ngModel)]="fmrRegistro.nombre">
+                <input type="email" name="email" placeholder="Correo Electrónico" [(ngModel)]="fmrRegistro.email">
+                <input type="password" name="password" placeholder="Contraseña" [(ngModel)]="fmrRegistro.contrasena">
+                <input type="password" name="password2" placeholder="Repetir Contraseña"
+                  [(ngModel)]="fmrRegistro.contrasena2">
+
+                <ul style="font-size: 10px; padding-left: 15px !important;">
+                  <li>Mínimo 8 caracteres</li>
+                  <li>Máximo 15 caracteres</li>
+                  <li>Al menos una letra mayúscula</li>
+                  <li>Al menos una letra minucula</li>
+                  <li>Al menos un dígito</li>
+                  <li>No espacios en blanco</li>
+                  <li>Al menos 1 caracter especial(-,_,$,!,*,+)</li>
+                </ul>
+                <div class="button-box">
+                  <br>
+                  <div class="deals-btn" style="float: right;">
+                    <a class="btn-style-2" style="cursor: pointer; color: white;" (click)="registrarUsuario()">
+                      Registrate
+                    </a>
+                  </div>
+                  <br><br>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

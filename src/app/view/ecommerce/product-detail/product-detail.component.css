@@ -1,0 +1,25 @@
+
+            .horizontal-scroll-contenedor{
+                width: 100%;
+                height: 130px;
+                overflow-y: hidden;
+                overflow-x: auto;
+                padding-top: 10px;
+                padding-bottom: 1px !important;
+                padding-left: 50px;
+                padding-right: 50px;
+               
+                text-align: center;
+                align-items: center;
+                align-content: center;
+            }
+
+            .horizontal-scroll-contenedor > a {
+                display: inline-block;
+                text-align: center;
+                padding-bottom: 1px !important;
+                margin-bottom:  1px !important;
+                padding: 10px;
+                cursor: pointer;
+            }
+        

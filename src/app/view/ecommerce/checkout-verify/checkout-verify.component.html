@@ -1,0 +1,32 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="square-jelly-box" [fullScreen]="true">
+  <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<app-top-bar [datosCarrito]="itemsCarrito"></app-top-bar>
+<div class="breadcrumb-area gray-bg-7">
+  <div class="container">
+    <div class="breadcrumb-content">
+      <ul>
+        <li><a href="/">Inicio</a></li>
+        <li class="text-red">Resultado Pago</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="checkout-area pb-45 pt-65">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12" style="text-align: center;">
+        <img src="../../../../assets/img/check.png" alt="" width="110"><br><br>
+        <b style="font-size: 18px;">Pago Exitoso</b>
+      </div>
+      <div class="col-md-12" style="text-align: center;">
+        <img src="../../../../assets/img/cancel.png" alt="" width="110"><br><br>
+        <b style="font-size: 18px;">Pago Rechazado</b>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

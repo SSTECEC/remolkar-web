@@ -1,0 +1,153 @@
+<app-top-bar [datosCarrito]="itemsCarrito"></app-top-bar>
+<div class="breadcrumb-area gray-bg-7">
+  <div class="container">
+    <div class="breadcrumb-content">
+      <ul>
+        <li><a href="/">Inicio</a></li>
+        <li class="text-red">Carrito</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="cart-main-area pt-60 pb-65">
+  <div class="container">
+    <h3 class="page-title">Artículos del Carrito</h3>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+        <div>
+          <div class="table-content table-responsive">
+            <table style="width: 100%;">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Nombre</th>
+                  <th>Precio Unitario</th>
+                  <th>Cantidad</th>
+                  <th>Subtotal</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngIf="itemsCarrito.lstCarrito.length == 0">
+                  <td colspan="6">
+                    No existen productos en el carrito de compras.
+                  </td>
+                </tr>
+                <tr *ngFor="let carrito of itemsCarrito.lstCarrito">
+                  <td class="product-thumbnail">
+                    <a href="/producto/{{carrito.data.idProducto}}">
+                      <img [src]="urls.conexionImagenes + '/' + obtenerImagen(carrito.data.imagen)"
+                        style="width: 80% !important;">
+                    </a>
+                  </td>
+                  <td class="product-name"><a href="/producto/{{carrito.data.idProducto}}">{{carrito.data.nombre}}</a>
+                  </td>
+                  <td class="product-price-cart"><span class="amount">$
+                      {{ generico.formatearNumero(obtenerPrecio(carrito.data),2) }}</span></td>
+                  <td class="product-quantity">
+                    <div class="pro-dec-cart">
+                      <input class="cart-plus-minus-box" type="text" [value]="carrito.cantidad" name="qtybutton"
+                        disabled>
+                    </div>
+                  </td>
+                  <td class="product-subtotal">$
+                    {{ generico.formatearNumero(obtenerTotalItem(carrito.cantidad, carrito.data),2) }}</td>
+                  <td class="product-remove">
+                    <a style="cursor: pointer;" (click)="eliminarItemCarrito(carrito.data.idProducto)"><i
+                        class="fa fa-times"></i></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="cart-shiping-update-wrapper">
+                <div class="cart-shiping-update">
+                  <a href="/productos" class="boton-red">Continuar Comprando</a>
+                </div>
+                <div class="cart-clear">
+                  <a style="cursor: pointer;" class="boton-red" (click)="eliminarCarrito()">Vaciar Carrito</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 col-md-6">
+            <div class="cart-tax">
+              <div class="title-wrap">
+                <h4 class="cart-bottom-title section-bg-white">Envios e instalaciones</h4>
+              </div>
+              <div class="tax-wrapper">
+                <div class="tax-select-wrapper">
+                  <div class="tax-select">
+                    <label>
+                      * Envios
+                    </label>
+                    <select class="email s-email s-wid" name="envios" [(ngModel)]="fmrEnvios.envio" (ngModelChange)="gestionTipo()">
+                      <option [value]="-1">Seleccionar Tipo</option>
+                      <option [value]="1">Domicilio</option>
+                      <option [value]="2">Talleres afiliados</option>
+                    </select>
+                  </div>
+                  <div *ngIf="fmrEnvios.envio == 1" class="tax-select">
+                    <label>
+                      * Dirección del Domicilio <small style="color: #df2121 !important;">(* Solo Guayaquil)</small>
+                    </label>
+                    <input type="text" required="" name="name" [(ngModel)]="fmrEnvios.direccion">
+                  </div>
+                  <div *ngIf="fmrEnvios.envio == 2" class="tax-select">
+                    <label>
+                      * Talleres
+                    </label>
+                    <select class="email s-email s-wid" [(ngModel)]="fmrEnvios.taller">
+                      <option [value]="-1">Seleccionar Taller</option>
+                      <option *ngFor="let taller of lstTalleres" [value]="taller.idTaller">{{ taller.nombre }}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="discount-code-wrapper">
+              <div class="title-wrap">
+                <h4 class="cart-bottom-title section-bg-white">Cupones</h4>
+              </div>
+              <div class="discount-code">
+                <p>Introduce tu código de cupón si tienes uno.</p>
+                <div>
+                  <input type="text" required="" name="name">
+                  <button class="cart-btn-2 boton-red" type="submit" style="font-size: 12px;">Aplicar Cupón</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-12">
+            <div class="grand-totall">
+              <div class="title-wrap">
+                <h4 class="cart-bottom-title section-bg-gary-cart">Total Carrito</h4>
+              </div>
+              <h5>Subtotal <span>$ {{ generico.formatearNumero(valores.subtotal,2) }}</span></h5>
+              <h5 *ngIf="fmrEnvios.envio == 1">Envío <span>$ 20.00</span></h5>
+              <h5>Iva <span>$ {{ generico.formatearNumero(valores.iva,2) }}</span></h5>
+
+              <h4 class="grand-totall-title text-red">Total <span>$
+                  {{ generico.formatearNumero(valores.total,2) }}</span></h4>
+
+
+              <a *ngIf="usuario.token == null" class="boton-gray">Continuar</a>
+              <small *ngIf="usuario.token == null">Inicia sesión o registrate para continuar.</small><br>
+              <small *ngIf="usuario.token == null">Si ya iniciaste sesión y no se activa el botón refresca (F5) la
+                página.</small>
+              <a *ngIf="usuario.token != null" class="button-red" style="cursor: pointer;"
+                (click)="comprar()">Continuar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

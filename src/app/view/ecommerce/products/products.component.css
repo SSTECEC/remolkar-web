@@ -1,0 +1,43 @@
+::ng-deep .custom-slider .ng5-slider .ng5-slider-bar {
+  background: #f8a6a6;
+  height: 4px;
+}
+::ng-deep .custom-slider .ng5-slider .ng5-slider-selection {
+  background: #df2121;
+}
+::ng-deep .custom-slider .ng5-slider .ng5-slider-pointer {
+  width: 8px;
+  height: 16px;
+  top: auto;
+  /* to remove the default positioning */
+  bottom: 0;
+  background-color: #242424;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+::ng-deep .custom-slider .ng5-slider .ng5-slider-pointer:after {
+  display: none;
+}
+::ng-deep .custom-slider .ng5-slider .ng5-slider-bubble {
+  bottom: 14px;
+}
+::ng-deep .custom-slider .ng5-slider .ng5-slider-limit {
+  font-weight: bold;
+  color:  #df2121;
+}
+::ng-deep .custom-slider .ng5-slider .ng5-slider-tick {
+  width: 2px;
+  height: 10px;
+  margin-left: 4px;
+  border-radius: 0;
+  background: #f8a6a6;
+  top: -1px;
+}
+::ng-deep .custom-slider .ng5-slider .ng5-slider-tick.ng5-slider-selected {
+  background:  #df2121;
+}
+
+
+.click{
+  cursor: pointer;
+}

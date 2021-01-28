@@ -1,0 +1,154 @@
+<app-top-bar [datosCarrito]="itemsCarrito"></app-top-bar>
+<div class="breadcrumb-area gray-bg-7">
+  <div class="container">
+    <div class="breadcrumb-content">
+      <ul>
+        <li><a href="/">Inicio</a></li>
+        <li class="text-red">Asistencias </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="blog-area pt-65 pb-65" style="background-image: url('../../../../assets/img/fondo2.jpg'); width: 100%; background-position: center; background-repeat: no-repeat; background-size: cover;">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-12 col-lg-12">
+
+        <ng-container *ngFor="let servicio of lstServicios; let i=index">
+
+          <div *ngIf="orden(i) == 1">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="blog-details-content">
+                  <h2>{{ servicio.nombre }}</h2>
+                  <div class="blog-meta mb-20">
+                    <ul>
+                      <li>Oct - 03.10.2020 </li>
+                      <li>
+
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-7">
+
+                <div class="blog-img mb-30">
+
+                  <a href="/producto/{{servicio.idProducto}}"><img [src]="urls.conexionImagenes + '/' + servicio.imagen"
+                      style="width: 100% !important; border: 1px solid #E8E8E8"
+                      onerror="this.onerror == null; this.src = 'https://www.remolkar.com/imagenes/productos/predeterminado.png'"></a>
+
+                </div>
+              </div>
+              <div class="col-md-5">
+                <p style="text-align: justify !important;" [innerHTML]="servicio.descripcion">
+                </p>
+
+                <div *ngIf="servicio.promocion == 1" class="product-price-wrapper">
+                  <span style="font-size: 22px; font-weight: bold;" class="text-red">
+                    $ {{ generico.formatearNumero(servicio.precioDescuento,2) }}
+                  </span>
+                  <span style="font-size: 19px;" class="product-price-old">
+                    $ {{ generico.formatearNumero(servicio.precio,2) }}
+                  </span>
+                  <small> INCLUIDO IVA</small>
+                </div>
+
+                <div *ngIf="servicio.promocion == 0" class="product-price-wrapper">
+                  <b style="font-size: 22px;" class="text-red">$ {{generico.formatearNumero(servicio.precio,2)}}</b>
+                  <small> INCLUIDO IVA</small>
+                </div>
+                <br>
+                <p></p>
+
+                <div class="product-action" style="display: block !important;">
+                  <a class="action-cart boton-gray" title="Wishlist"
+                    (click)="favorito.agregarItemFavorito(servicio.idProducto, servicio)">
+                    <i class="fa fa-heart-o"></i>
+                  </a>
+                  <a class="action-cart boton-red" (click)="agregarItemCarrito(servicio)">
+                    Añadir al Carrito
+                  </a>
+                </div>
+
+              </div>
+            </div>
+            <hr>
+          </div>
+
+          <div *ngIf="orden(i) == 0">
+            <div class="row">
+
+              <div class="col-md-12" style="text-align: right !important;">
+                <div class="blog-details-content">
+                  <h2>{{ servicio.nombre }}</h2>
+                  <div class="blog-meta mb-20">
+                    <ul>
+                      <li>Oct - 03.10.2020 </li>
+                      <li>
+
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-5">
+                <p style="text-align: justify !important;" [innerHTML]="servicio.descripcion">
+                </p>
+
+                <div *ngIf="servicio.promocion == 1" class="product-price-wrapper">
+                  <span style="font-size: 22px; font-weight: bold;" class="text-red">
+                    $ {{ generico.formatearNumero(servicio.precioDescuento,2) }}
+                  </span>
+                  <span style="font-size: 19px;" class="product-price-old">
+                    $ {{ generico.formatearNumero(servicio.precio,2) }}
+                  </span>
+                  <small> INCLUIDO IVA</small>
+                </div>
+
+                <div *ngIf="servicio.promocion == 0" class="product-price-wrapper">
+                  <b style="font-size: 22px;" class="text-red">$ {{generico.formatearNumero(servicio.precio,2)}}</b>
+                  <small> INCLUIDO IVA</small>
+                </div>
+                <br>
+                <p></p>
+
+                <div class="product-action" style="display: block !important;">
+                  <a class="action-cart boton-gray" title="Wishlist"
+                    (click)="favorito.agregarItemFavorito(servicio.idProducto, servicio)">
+                    <i class="fa fa-heart-o"></i>
+                  </a>
+                  <a class="action-cart boton-red" (click)="agregarItemCarrito(servicio)">
+                    Añadir al Carrito
+                  </a>
+                </div>
+              </div>
+
+              <div class="col-md-7">
+                <div class="blog-img mb-30">
+
+                  <a href="/producto/{{servicio.idProducto}}"><img [src]="urls.conexionImagenes + '/' + servicio.imagen"
+                      style="width: 100% !important; border: 1px solid #E8E8E8"
+                      onerror="this.onerror == null; this.src = 'https://www.remolkar.com/imagenes/productos/predeterminado.png'"></a>
+
+                </div>
+              </div>
+
+            </div>
+            <hr>
+          </div>
+
+        </ng-container>
+
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

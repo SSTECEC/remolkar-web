@@ -1,0 +1,389 @@
+<app-top-bar [datosCarrito]="itemsCarrito" (change)="cambiarIdioma($event)"></app-top-bar>
+<div class="slider-area border-bottom-2">
+  <div class="slider-active owl-dot-style-2 owl-dot-red owl-carousel">
+    <div class="single-slider pt-130 pb-140 bg-img slider-height-6"
+      style="background-image:url({{carrusel.primero.foto}});">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7">
+            <div class="slider-content-5 slider-animated-1">
+              <div [innerHTML]="carrusel.primero.descripcion"></div>
+              <div style="color: #ffffff; padding-top: 10px !important;">
+                Para saber el ANCHO, PERFIL y RIN de tu vehículo 
+                <a style="color: #ffffff; cursor: pointer;" (click)="abrirModal()"><u>ingresa aquí.</u>
+                </a>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-md-3">
+
+                  <select class="btn-filter" [(ngModel)]="filtroLlantas.ancho">
+                    <option value="0">ANCHO</option>
+                    <option *ngFor="let ancho of lstLlantas.ancho" value="{{ancho}}" style="color: #000000 !important;">
+                      ANCHO: {{ancho}}</option>
+                  </select>
+                  <br><br>
+                </div>
+
+                <div class="col-md-3">
+                  <select class="btn-filter" [(ngModel)]="filtroLlantas.perfil">
+                    <option value="0">PERFIL</option>
+                    <option *ngFor="let perfil of lstLlantas.perfil" value="{{perfil}}"
+                      style="color: #000000 !important;">PERFIL: {{perfil}}</option>
+                  </select>
+                  <br><br>
+                </div>
+
+                <div class="col-md-3">
+
+                  <select class="btn-filter" [(ngModel)]="filtroLlantas.rin">
+                    <option value="0">RIN</option>
+                    <option *ngFor="let rin of lstLlantas.rin" value="{{rin}}" style="color: #000000 !important;">RIN:
+                      {{rin}}</option>
+                  </select>
+                  <br><br>
+                </div>
+
+                <div class="col-md-3"></div>
+              </div>
+
+              <div class="deals-btn mt-75">
+                <a class="animated btn-style-2 text-white" (click)="filtrarLlantas()">
+                  <i class="fa fa-search"></i>&nbsp; Buscar</a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="single-slider pt-130 pb-140 bg-img slider-height-6"
+      style="background-image:url({{carrusel.segundo.foto}});">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7">
+            <div class="slider-content-5 slider-animated-1">
+              <div [innerHTML]="carrusel.segundo.descripcion"></div>
+              <br>
+              <div class="row">
+                <div class="col-md-6">
+                  <a class="btn-filter" style="text-align: center !important;" href="https://llantasneumaticos.com"
+                    target="_blank">Ver Marcas - Modelos</a>
+                  <br><br>
+                </div>
+
+                <div class="col-md-6">
+                  <!--<a class="btn-filter" style="text-align: center !important; color: #ffffff !important;"
+                    data-toggle="modal" data-target="#exampleModalCenter">Tutorial</a>
+                  <br><br>-->
+                </div>
+              </div>
+
+              <div class="deals-btn mt-75">
+                <br><br>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="single-slider pt-130 pb-140 bg-img slider-height-6"
+      style="background-image:url({{carrusel.tercero.foto}});">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7">
+            <div class="slider-content-5 slider-animated-1">
+              <div [innerHTML]="carrusel.tercero.descripcion"></div>
+
+              <div class="deals-btn mt-75">
+                <a class="animated btn-style-2 text-white" href="/servicios"><i class="fa fa-chevron-right"></i>
+                  Solicitar</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="banner-area mt-30">
+  <div class="container">
+    <div class="row">
+      <div *ngFor="let video of lstVideos" class="col-lg-4 col-md-4">
+        <div class="banner-img banner-hover banner-mrg">
+          <video [src]="urls.conexionVideos + '/' + video.link" width="100%" height=300 controls
+            poster="{{ video.descripcion }}">
+            Lo sentimos. Este vídeo no puede ser reproducido en tu navegador.<br>
+            La versión descargable está disponible en <a href="URL">Enlace</a>.
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="best-selling-area pt-60 pb-45">
+
+  <div class="container">
+    <div class="top-bar section-border mb-5">
+      <div class="section-title-wrapper section-bg-white">
+        <h4 class="section-title">Destacados | Descuentos</h4>
+      </div>
+      <div class="product-tab-list-2 nav section-bg-white">
+        <a class="active" href="#tabDestacados" data-toggle="tab">
+          <h4></h4>
+        </a>
+      </div>
+    </div>
+    <div class="tab-content jump">
+      <div class="tab-pane active" id="tabDestacados">
+
+        <div class="height-empty"></div>
+
+        <div class="row">
+          <div *ngFor="let descuento of lstProductosDescuentos" class="col-md-3">
+            <div class="devita-product-2 devita-product-red">
+              <div class="product-img">
+                <a href="/producto/{{descuento.idProducto}}"><img
+                    [src]="urls.conexionImagenes + '/' + obtenerImagen(descuento.imagen)"
+                    style="width: 100% !important; border: 1px solid #E8E8E8"
+                    onerror="this.onerror == null; this.src = 'https://www.remolkar.com/imagenes/productos/predeterminado.png'"></a>
+              </div>
+              <div class="list-col">
+                <div class="gridview">
+                  <div class="product-content text-center">
+                    <span>{{descuento.categoriaNombre}}</span>
+                    <h4><a href="/producto/{{descuento.idProducto}}">{{descuento.nombre}}</a></h4>                
+
+                    <div *ngIf="descuento.promocion == 1" class="product-price-wrapper">
+                      <span class="text-red">$ {{ generico.formatearNumero(descuento.precioDescuento,2) }}</span>     
+                      <br>                         
+                      <span class="product-price-old">$ {{ generico.formatearNumero(descuento.precio,2) }}</span>                           
+                    </div>                   
+
+                    <div *ngIf="descuento.promocion == 0" class="product-price-wrapper">
+                      <span>$ {{generico.formatearNumero(descuento.precio,2)}}</span>                
+                    </div>
+                
+                  </div>
+                  <br>
+                  <br>
+                  <br>
+
+                  <div class="product-action-wrapper-2 text-center">
+                    <div class="product-rating">
+                      <i class="ion-android-star-outline theme-star"></i>
+                      <i class="ion-android-star-outline theme-star"></i>
+                      <i class="ion-android-star-outline theme-star"></i>
+                      <i class="ion-android-star-outline theme-star"></i>
+                      <i class="ion-android-star-outline theme-star"></i>
+                    </div>
+
+                    <div class="product-action">
+                      <a class="same-action" title="Wishlist" style="cursor: pointer;"
+                        (click)="favorito.agregarItemFavorito(descuento.idProducto, descuento)">
+                        <i class="fa fa-heart-o"></i>
+                      </a>
+                      <a class="action-cart" style="cursor: pointer;" (click)="agregarItemCarrito(descuento)">
+                        Añadir al Carrito
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div *ngIf="productoPromocion.estado == 1" class="deals-area pt-65 pb-65 border-top-2"
+  style='background-image: url("https://www.remolkar.com/imagenes/productos/slider1.jpg"); width: 100%; background-position: center; background-repeat: no-repeat; background-size: cover;'>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 col-md-6">
+        <div class="deals-img">
+          <img class="tilter" [src]="urls.conexionImagenes + '/' + obtenerImagen(productoPromocion.datos.imagen)"
+            style="width: 100% !important;"
+            onerror="this.onerror == null; this.src = 'https://www.remolkar.com/imagenes/productos/predeterminado.png'">
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6">
+        <div class="deals-content" style="text-align: center;">
+          <img alt="" src="assets/img/icon-img/deals-2.png">
+          <h2 style="color: #ffffff;">Promoción especial
+            <span>{{ generico.formatearNumero(productoPromocion.datos.descuento,0)}}% descuento</span></h2>
+          <div style="color: #ffffff;">
+            <h4 style="color: #ffffff;">{{productoPromocion.datos.nombre}}</h4>
+            <br>
+
+            <br><br>
+            <div>
+              <br><br>
+              <h3 style="color: #ffffff;">$ {{generico.formatearNumero(productoPromocion.datos.precioDescuento,2)}}</h3>
+              <div style="padding-top: 3px;">
+                <a href="/producto/{{productoPromocion.datos.idProducto}}" class="text-red">Ver Más...</a>
+              </div>
+            </div>
+          </div>
+          <div class="timer timer-style-2 mb-50 mt-30">
+            <div data-countdown="2020/12/24"></div>
+          </div>
+          <div class="deals-btn">
+            <a class="btn-style-2" style="cursor: pointer; color: white;"
+              (click)="agregarItemCarrito(productoPromocion.datos)">Agregar al Carrito</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="product-area pb-60 border-top-2 pt-65">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="new-arrivals-area">
+          <div class="section-border mb-40">
+            <h4 class="section-title section-bg-white">Nuevos Productos</h4>
+          </div>
+          <div class="product-slider-active-2 nav-style nav-style-red owl-carousel">
+            <div *ngFor="let nuevo of lstProductosNuevos" class="single-product-bundle">
+              <div class="single-product-wrapper single-product-red">
+                <div class="single-product-img">
+                  <a href="/producto/{{nuevo.idProducto}}">
+                    <img class="tilter" [src]="urls.conexionImagenes + '/' + obtenerImagen(nuevo.imagen)"
+                      style="width: 100% !important; border: 1px solid #E8E8E8"
+                      onerror="this.onerror == null; this.src = 'https://www.remolkar.com/imagenes/productos/predeterminado.png'">
+                  </a>
+                </div>
+                <div class="product-content">
+                  <span>{{nuevo.categoriaNombre}}</span>
+                  <h4>
+                    <a href="/producto/{{nuevo.idProducto}}">{{nuevo.nombre}}</a>
+                  </h4>
+
+                  <div *ngIf="nuevo.promocion == 1" class="product-price-wrapper">
+                    <span class="text-red">$ {{ generico.formatearNumero(nuevo.precioDescuento,2) }}</span>
+                    <br>
+                    <span class="product-price-old">$ {{ generico.formatearNumero(nuevo.precio,2) }}</span>
+                  </div>
+
+                  <div *ngIf="nuevo.promocion == 0" class="product-price-wrapper">
+                    <span>$ {{generico.formatearNumero(nuevo.precio,2)}}</span>
+                  </div>
+
+                </div>
+              </div>
+              <br>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="new-arrivals-area mrg-top-md mrg-top-sm">
+          <div class="section-border mb-40">
+            <h4 class="section-title section-bg-white">Top Favoritos</h4>
+          </div>
+          <div class="product-slider-active-2 nav-style nav-style-red owl-carousel">
+            <div *ngFor="let favoritos of lstProductosFavoritos" class="single-product-bundle">
+              <div class="single-product-wrapper single-product-red">
+                <div class="single-product-img">
+                  <a href="/producto/{{favoritos.idProducto}}">
+                    <img class="tilter" [src]="urls.conexionImagenes + '/' + obtenerImagen(favoritos.imagen)"
+                      style="width: 100% !important; border: 1px solid #E8E8E8"
+                      onerror="this.onerror == null; this.src = 'https://www.remolkar.com/imagenes/productos/predeterminado.png'">
+                  </a>
+                </div>
+                <div class="product-content">
+                  <span>{{favoritos.categoriaNombre}}</span>
+                  <h4>
+                    <a href="/producto/{{favoritos.idProducto}}">{{favoritos.nombre}}</a>
+                  </h4>
+
+                  <div *ngIf="favoritos.promocion == 1" class="product-price-wrapper">
+                    <span class="text-red">$ {{ generico.formatearNumero(favoritos.precioDescuento,2) }}</span>
+                    <br>
+                    <span class="product-price-old">$ {{ generico.formatearNumero(favoritos.precio,2) }}</span>
+                  </div>
+
+                  <div *ngIf="favoritos.promocion == 0" class="product-price-wrapper">
+                    <span>$ {{generico.formatearNumero(favoritos.precio,2)}}</span>
+                  </div>
+
+                </div>
+              </div>
+              <br>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="new-arrivals-area mrg-top-md mrg-top-sm">
+          <div class="section-border mb-40">
+            <h4 class="section-title section-bg-white">Más Vendidos</h4>
+          </div>
+          <div class="product-slider-active-2 nav-style nav-style-red owl-carousel">
+            <div *ngFor="let vendido of lstProductosNuevos" class="single-product-bundle">
+              <div class="single-product-wrapper single-product-red">
+                <div class="single-product-img">
+                  <a href="/producto/{{vendido.idProducto}}">
+                    <img class="tilter" [src]="urls.conexionImagenes + '/' + obtenerImagen(vendido.imagen)"
+                      style="width: 100% !important; border: 1px solid #E8E8E8"
+                      onerror="this.onerror == null; this.src = 'https://www.remolkar.com/imagenes/productos/predeterminado.png'">
+                  </a>
+                </div>
+                <div class="product-content">
+                  <span>{{vendido.categoriaNombre}}</span>
+                  <h4>
+                    <a href="/producto/{{vendido.idProducto}}">{{vendido.nombre}}</a>
+                  </h4>
+
+                  <div *ngIf="vendido.promocion == 1" class="product-price-wrapper">
+                    <span class="text-red">$ {{ generico.formatearNumero(vendido.precioDescuento,2) }}</span>
+                    <br>
+                    <span class="product-price-old">$ {{ generico.formatearNumero(vendido.precio,2) }}</span>
+                  </div>
+
+                  <div *ngIf="vendido.promocion == 0" class="product-price-wrapper">
+                    <span>$ {{generico.formatearNumero(vendido.precio,2)}}</span>
+                  </div>
+
+                </div>
+              </div>
+              <br>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Video Tutorial</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <video [src]="urls.conexionVideos + '/VideoTutorial.MP4'" width="100%" height=300 controls>
+          Lo sentimos. Este vídeo no puede ser reproducido en tu navegador.<br>
+          La versión descargable está disponible en <a href="URL">Enlace</a>.
+        </video>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-filter" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>

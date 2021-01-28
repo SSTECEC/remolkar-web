@@ -1,0 +1,17 @@
+.boton-red{
+    background-color: #df2121 !important;
+    color: #fff !important;
+    border-radius: 3px  !important;
+}
+
+.boton-red:hover{
+    background-color: #242424 !important;
+    color: #fff !important;
+}
+
+
+.boton-gray{
+    background-color: #8f8f8f !important;
+    color: #fff !important;
+    border-radius: 3px  !important;
+}

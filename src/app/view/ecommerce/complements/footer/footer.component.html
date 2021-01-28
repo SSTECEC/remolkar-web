@@ -1,0 +1,242 @@
+<div id="detalleWp" class="flotante-detalle">
+  <div class="wp-head">
+    <img src="../../../../../assets/img/icons/wp.png" alt="" width="23"> &nbsp; Inicia una conversación
+  </div>
+  <div class="wp-body">
+    <div style="padding-bottom: 5px;">
+      <small>El equipo generalmente responde inmediatamente.</small>
+    </div>
+    <a href="https://wa.me/593998397303?text=Hola, necesito información sobre los servicios y productos que ofrece."
+      target="_blank">
+      <div class="wp-card">
+        <div class="row">
+          <div class="col-2">
+            <img src="../../../../../assets/img/icons/wp-card-l.png" width="35">
+          </div>
+          <div class="col-7">
+            Ramiro Arboleda <br>
+            <small>Soporte Ventas</small>
+          </div>
+          <div class="col-3">
+            <img src="../../../../../assets/img/icons/llanta.png" width="35">
+          </div>
+        </div>
+      </div>
+    </a>
+    <br>
+    <a href="https://wa.me/593992943174?text=Hola, necesito información sobre los servicios y productos que ofrece."
+      target="_blank">
+      <div class="wp-card-2">
+        <div class="row">
+          <div class="col-2">
+            <img src="../../../../../assets/img/icons/wp-card-l.png" width="35">
+          </div>
+          <div class="col-7">
+            Ramiro Arboleda <br>
+            <small>Asistencia Grúas</small>
+          </div>
+          <div class="col-3">
+            <img src="../../../../../assets/img/icons/grua.png" width="35">
+          </div>
+        </div>
+      </div>
+    </a>
+    <br>
+  </div>
+</div>
+<div id="btnWp" class='flotante'>
+  <img src='../../../../../assets/img/icons/whatsapp.webp' width="60" />
+</div>
+<div id="btnWpClose" class='flotante'>
+  <img src='../../../../../assets/img/icons/wp-close.png' width="60" />
+</div>
+
+<!--<div class="brand-logo-area">
+  <div class="container">
+    <div class="brand-logo-active owl-carousel border-top-2 ptb-60">
+      <div class="single-brand-logo">
+        <img alt="" src="assets/img/brand-logo/brand-logo-1.png">
+      </div>
+      <div class="single-brand-logo">
+        <img alt="" src="assets/img/brand-logo/brand-logo-2.png">
+      </div>
+      <div class="single-brand-logo">
+        <img alt="" src="assets/img/brand-logo/brand-logo-3.png">
+      </div>
+      <div class="single-brand-logo">
+        <img alt="" src="assets/img/brand-logo/brand-logo-4.png">
+      </div>
+      <div class="single-brand-logo">
+        <img alt="" src="assets/img/brand-logo/brand-logo-5.png">
+      </div>
+      <div class="single-brand-logo">
+        <img alt="" src="assets/img/brand-logo/brand-logo-2.png">
+      </div>
+    </div>
+  </div>
+</div><![endif]-->
+
+<div class="shop-service-area gray-bg-3 pt-65">
+  <div class="container">
+    <div class="shop-service-wrapper service-white white-bg">
+      <div class="row">
+        <div class="col-lg-4 col-md-4">
+          <div class="shop-service-content text-center service-black-color">
+            <h4>Envíos</h4>
+            <p>Envíos seguros y costo accesible</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4">
+          <div class="shop-service-content text-center service-black-color">
+            <h4>Devoluciones</h4>
+            <p>30 días para la devolución gratuita</p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-4">
+          <div class="shop-service-content text-center border-none service-black-color">
+            <h4>Soporte Online</h4>
+            <p>Soporte 24/7</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer class="footer-area gray-bg-3 pt-60" style='background-image: url("https://www.remolkar.com/imagenes/productos/slider4.jpg");
+  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;'>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 col-md-6">
+        <div class="footer-widget footer-widget-red footer-black-color mb-40">
+          <div class="footer-title mb-30">
+            <h4 class="text-light">Acerca</h4>
+          </div>
+          <div class="footer-about">
+            <a href="/contacto">
+              <p class="text-light">{{ reducirTexto(dtsEmpresa.acerca) }}</p>
+            </a>
+
+            <div class="footer-map">
+              <a href="/contacto"><i class="ion-ios-location-outline"></i> Ver ubicación en el mapa</a>
+            </div>
+          </div>
+          <div class="social-icon mr-40">
+            <ul>
+              <li *ngFor="let red of lstSocial">
+                <a href="{{ red.link }}" class="{{ red.nombre }}">
+                  <i class="{{ red.logo }}"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-6">
+        <div class="footer-widget footer-widget-red footer-black-color mb-40">
+          <div class="footer-title mb-30">
+            <h4 class="text-light">Información</h4>
+          </div>
+          <div class="footer-content">
+            <ul>
+              <li><a href="#" class="text-light">Productos</a></li>
+              <li><a href="#" class="text-light">Marcas</a></li>
+              <li><a href="#" class="text-light">Acerca</a></li>
+              <li><a href="#" class="text-light">Contacto</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-6">
+        <div class="footer-widget footer-widget-red mb-40 footer-black-color">
+          <div class="footer-title mb-30">
+            <h4 class="text-light">Perfil</h4>
+          </div>
+          <div class="footer-content">
+            <ul>
+              <li><a href="" class="text-light">Datos de Facturación</a></li>
+              <li><a href="" class="text-light">Historial de Órdenes</a></li>
+              <li><a href="" class="text-light">Favoritos</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="footer-widget footer-widget-red-2 mb-40 footer-black-color">
+          <div class="footer-title mb-30">
+            <h4 class="text-light">Contacto</h4>
+          </div>
+          <div class="footer-contact">
+            <ul>
+              <li class="text-light">Dirección: {{ dtsEmpresa.direccionSucursal }}</li>
+              <li class="text-light">Teléfono: (593) {{ dtsEmpresa.telefonoSucursal }}</li>
+              <li class="text-light">Email: <a href="" class="text-light">{{ dtsEmpresa.email }}</a></li>
+            </ul>       
+          </div>
+          <div class="opening-time">
+            <br>
+            <div class="footer-title mb-30">
+              <h4 class="text-light">Horarios</h4>
+            </div>
+            <div class="opening-content">
+              <ul>
+                <li class="text-light">Apertura: {{ dtsEmpresa.apertura }} - Cierre: {{ dtsEmpresa.cierre }}</li>
+                <li class="text-light">{{ dtsEmpresa.descripcion }}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="pt-60 pb-65 border-top-2">
+      <div class="row">
+        <div class="col-12">
+          <div class="footer-middle text-center red-color footer-black-color">
+            <div class="footer-tag">
+              <ul>
+                <li><a href="#" class="text-light">Compras en línea </a></li>
+                <li><a href="#" class="text-light">Promociones </a></li>
+                <li><a href="#" class="text-light">Órdenes </a></li>
+                <li><a href="#" class="text-light">Ayuda </a></li>
+                <li><a href="#" class="text-light">Servicio de atención al cliente</a></li>
+                <li><a href="#" class="text-light">Soporte </a></li>
+                <li><a href="#" class="text-light">Los más populares </a></li>
+                <li><a href="#" class="text-light">Los recién llegados </a></li>
+                <li><a href="#" class="text-light">Productos especiales </a></li>
+                <li><a href="#" class="text-light">Nuestras tiendas </a></li>
+                <li><a href="#" class="text-light">Envío </a></li>
+                <li><a href="#" class="text-light">Pagos </a></li>
+                <li><a href="#" class="text-light">Garantía </a></li>
+                <li><a href="#" class="text-light">Reembolsos </a></li>
+                <li><a href="#" class="text-light">Descuentos </a></li>
+                <li><a href="#" class="text-light">Términos y condiciones </a></li>
+                <li><a href="#" class="text-light">Política de envío </a></li>
+                <li><a href="#" class="text-light">Devoluciones </a></li>
+              </ul>
+            </div>
+            <div class="payment-icon mt-20">
+              <a href="#">
+                <img src="assets/img/icon-img/payment.png" alt="">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom pb-25 pt-25 white-bg green-color border-top-2">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="copyright text-center copyright-red footer-black-color">
+            <p>Copyright © <a href="#">SSTEC</a>. Todos los derechos reservados.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,101 @@
+<app-top-bar></app-top-bar>
+<div class="breadcrumb-area gray-bg-7">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <ul>
+                <li><a href="/">Inicio</a></li>
+                <li class="text-red">Acerca </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="about-us-area pt-80 pb-80"
+    style="background-image: url('../../../../assets/img/fondo2.jpg'); width: 100%; background-position: center; background-repeat: no-repeat; background-size: cover;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-7 d-flex align-items-center">
+                <div class="overview-content-2">
+                    <h2>Bienvenidos a Remolkar Store</h2>
+                    <p class="peragraph-blog" style="text-align: justify;">
+                        Es una tienda online que ofrece más 2000 referencias en un catálogo en constante
+                        evolución, para el automóvil y motos como lubricantes, neumáticos, accesorios, entre otras
+                        cosas.
+                        Además incluye un catálogo de servicios como grúas para automóviles, balanceo de neumáticos y
+                        limpieza & regulación de frenos.
+                    </p>
+                    <p style="text-align: justify;">
+                        Además ofrecemos varias promociones en todos lo productos y servicios. Los precios de
+                        <b>Remolkar Store</b> son los precios más bajos del mercado.
+                    </p>
+                    <div class="overview-btn mt-45">
+                        <a class="btn-style-2" style="background-color: #df2121 !important; color: #fff !important;"
+                            href="/productos">Comprar Ahora</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-5">
+                <div class="overview-img text-center">
+                    <a href="#">
+                        <img src="assets/img/banner/about-us.jpg" alt="">
+                        <img [src]="urls.conexionImagenes + '/about.jpg'" style="width: 100% !important; border: 1px solid #E8E8E8" onerror="this.onerror == null; this.src = 'https://www.remolkar.com/imagenes/productos/predeterminado.png'">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="project-count-area gray-bg pt-100 pb-70">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="single-count text-center mb-30">
+                    <div class="count-icon">
+                        <span class="ion-ios-briefcase-outline"></span>
+                    </div>
+                    <div class="count-title">
+                        <h2 class="count" style="color: #df2121;">0</h2>
+                        <span>Clientes</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="single-count text-center mb-30">
+                    <div class="count-icon">
+                        <span class="ion-ios-wineglass-outline"></span>
+                    </div>
+                    <div class="count-title">
+                        <h2 class="count" style="color: #df2121;">121</h2>
+                        <span>Productos</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="single-count text-center mb-30">
+                    <div class="count-icon">
+                        <span class="ion-ios-lightbulb-outline"></span>
+                    </div>
+                    <div class="count-title">
+                        <h2 class="count" style="color: #df2121;">10</h2>
+                        <span>Marcas</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="single-count text-center mb-30">
+                    <div class="count-icon">
+                        <span class="ion-happy-outline"></span>
+                    </div>
+                    <div class="count-title">
+                        <h2 class="count" style="color: #df2121;">0</h2>
+                        <span>Ventas</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>

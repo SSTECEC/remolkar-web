@@ -1,0 +1,249 @@
+<app-top-bar [datosCarrito]="itemsCarrito"></app-top-bar>
+<div class="breadcrumb-area gray-bg-7">
+  <div class="container">
+    <div class="breadcrumb-content">
+      <ul>
+        <li><a href="/">Inicio</a></li>
+        <li class="text-red">Detalle Producto | {{producto.nombre}}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="product-details pt-65 pb-65" style="background-image: url('../../../../assets/img/fondo2.jpg'); width: 100%; background-position: center; background-repeat: no-repeat; background-size: cover;">
+  <div class="container">
+    <div class="row">
+
+
+      <div class="col-lg-6 col-md-12">
+        <div class="product-details-img">
+
+          <div class="zoompro-border zoompro-span">
+
+            <img class="zoompro" [src]="urls.conexionImagenes + '/' + imagenSeleccionada"
+              style="width: 100% !important;" onerror="this.onerror == null; this.src = 'https://www.remolkar.com/imagenes/productos/predeterminado.png'">
+
+            <span *ngIf="producto.promocion == 1"
+              style="background-color: #df2121 !important ;">-{{ generico.formatearNumero(producto.descuento,0)}}%</span>
+          </div>
+
+        </div>
+        <div *ngIf="imagenes.length > 1" style="padding-right: 0.8px; padding-left: 0.8px;">
+          <div class="horizontal-scroll-contenedor">
+            <a *ngFor="let imagen of imagenes" (click)=cambiarImagen(imagen)>
+              <img [src]="urls.conexionImagenes + '/' + imagen" width="100" onerror="this.onerror == null; this.src = 'https://www.remolkar.com/imagenes/productos/predeterminado.png'">
+            </a>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-lg-6 col-md-12">
+        <div class="product-details-content devita-product-red">
+          <h4>{{producto.nombre}}</h4>
+          <div class="rating-review">
+            <b>SKU:</b>&nbsp; {{ producto.codigo }}
+          </div>
+          <div *ngIf="producto.promocion == 1" style="font-size: 24px !important;">
+            <span class="text-red">$ {{ generico.formatearNumero(producto.precioDescuento,2) }}</span>
+            <br>
+            <span class="product-price-old" style="text-decoration:line-through;">$
+              {{ generico.formatearNumero(producto.precio,2) }}</span>
+          </div>
+
+          <div *ngIf="producto.promocion == 0" style="font-size: 24px !important;">
+            <span>$ {{generico.formatearNumero(producto.precio,2)}}</span><small style="font-size: 10px !important;"> INCLUIDO IVA</small>
+          </div>
+          <div class="in-stock">
+            <p>Disponibilidad: <span class="text-red">En Stock: {{ producto.stock }}</span></p>
+          </div>
+          <div [innerHTML]="producto.descripcion">
+          </div>
+          <br>
+          <div class="quality-add-to-cart">
+            <div class="quality">
+              <label>Cant:</label>
+              <input class="cart-plus-minus-box" type="number" name="qtybutton" value="1" min="1" max="{{ producto.stock }}"
+                [(ngModel)]="cantidad">
+            </div>
+            <div class="product-action">
+              <a class="action-cart" style="cursor: pointer;" (click)="agregarItemCarrito(producto, 1)"> Añadir al Carrito
+              </a>
+              <a class="same-action" title="Wishlist" style="cursor: pointer;" (click)="favorito.agregarItemFavorito(producto.idProducto, producto)">
+                <i class="fa fa-heart-o"></i>
+              </a>
+            </div>
+          </div>
+          <div class="pro-dec-categories">
+            <ul>
+              <li class="categories-title">Categoría:</li>
+              <li><a>{{producto.categoriaNombre}}</a></li>
+            </ul>
+          </div>
+          <div class="pro-dec-categories">
+            <ul>
+              <li class="categories-title">Tags: </li>
+              <li><a>{{producto.tag}}</a></li>
+            </ul>
+          </div>
+          <div class="pro-dec-social">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<!--
+<div class="description-review-area pt-25 pb-70">
+  <div class="container">
+    <div class="description-review-wrapper">
+      <div class="description-review-topbar nav">
+        <a class="active" data-toggle="tab" href="#des-details3">Comentarios</a>
+      </div>
+      <div class="tab-content description-review-bottom">
+        <div id="des-details3" class="tab-pane active">
+          <div class="rattings-wrapper">
+            <div class="sin-rattings">
+              <div class="star-author-all">
+                <div class="ratting-star f-left text-red">
+                  <i class="ion-star theme-color text-red"></i>
+                  <i class="ion-star theme-color text-red"></i>
+                  <i class="ion-star theme-color text-red"></i>
+                  <i class="ion-star theme-color text-red"></i>
+                  <i class="ion-star theme-color text-red"></i>
+                  <span>(5)</span>
+                </div>
+                <div class="ratting-author f-right">
+                  <h3>Marco Vega</h3>
+                  <span>15:24</span>
+                  <span>28 Agosto 2020</span>
+                </div>
+              </div>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, quis nost rud
+                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor
+                sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Utenim ad minim veniam, quis nost.</p>
+            </div>
+            <div class="sin-rattings">
+              <div class="star-author-all">
+                <div class="ratting-star f-left text-red">
+                  <i class="ion-star theme-color text-red"></i>
+                  <i class="ion-star theme-color text-red"></i>
+                  <i class="ion-star theme-color text-red"></i>
+                  <i class="ion-star theme-color text-red"></i>
+                  <i class="ion-star theme-color text-red"></i>
+                  <span>(5)</span>
+                </div>
+                <div class="ratting-author f-right">
+                  <h3>Mario Palomo</h3>
+                  <span>12:24</span>
+                  <span>28 Agosto 2020</span>
+                </div>
+              </div>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, quis nost rud
+                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor
+                sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Utenim ad minim veniam, quis nost.</p>
+            </div>
+          </div>
+          <div class="ratting-form-wrapper">
+            <h3>Añadir Comentario :</h3>
+            <div class="ratting-form">
+              <form action="#">
+                <div class="star-box">
+                  <h2>Calificación:</h2>
+                  <div class="ratting-star text-red">
+                    <i class="ion-star theme-color text-red"></i>
+                    <i class="ion-star theme-color text-red"></i>
+                    <i class="ion-star theme-color text-red"></i>
+                    <i class="ion-star theme-color text-red"></i>
+                    <i class="ion-star  text-red"></i>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="rating-form-style mb-20">
+                      <input placeholder="Nombre" type="text">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="rating-form-style mb-20">
+                      <input placeholder="Correo Electrónico" type="text">
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="rating-form-style form-submit">
+                      <textarea name="message" placeholder="Comentario"></textarea>
+                      <input type="submit" value="Añadir Comentario" class="button-red">
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>-->
+<div class="product-area pb-45">
+  <div class="container">
+    <div class="section-border mb-10">
+      <h4 class="section-title section-bg-white">Productos Relacionados</h4>
+    </div>
+    <div class="product-slider-nav nav-style"></div>
+
+    <div class="row">
+      <div *ngFor="let descuento of lstProductosRelacionados" class="col-md-3">
+        <div class="devita-product-2 devita-product-red">
+          <div class="product-img">
+            <a href="/producto/{{descuento.idProducto}}"><img
+                [src]="urls.conexionImagenes + '/' + obtenerImagen(descuento.imagen)"
+                style="width: 100% !important; border: 1px solid #E8E8E8" onerror="this.onerror == null; this.src = 'https://www.remolkar.com/imagenes/productos/predeterminado.png'"></a>
+          </div>
+          <div class="list-col">
+            <div class="gridview">
+              <div class="product-content text-center">
+                <span>{{descuento.categoriaNombre}}</span>
+                <h4><a href="/producto/{{descuento.idProducto}}">{{descuento.nombre}}</a></h4>
+
+                <div *ngIf="descuento.promocion == 1" class="product-price-wrapper">
+                  <span class="text-red">$ {{ generico.formatearNumero(descuento.precioDescuento,2) }}</span>
+                  <br>
+                  <span class="product-price-old">$ {{ generico.formatearNumero(descuento.precio,2) }}</span>
+                </div>
+
+                <div *ngIf="descuento.promocion == 0" class="product-price-wrapper">
+                  <span>$ {{generico.formatearNumero(descuento.precio,2)}}</span>
+                </div>
+              </div>
+              <div class="product-action-wrapper-2 text-center">
+                <div class="product-rating">
+                  <i class="ion-android-star-outline theme-star"></i>
+                  <i class="ion-android-star-outline theme-star"></i>
+                  <i class="ion-android-star-outline theme-star"></i>
+                  <i class="ion-android-star-outline theme-star"></i>
+                  <i class="ion-android-star-outline theme-star"></i>
+                </div>
+                
+                <div class="product-action">
+                  <a class="same-action" title="Wishlist" href="#">
+                    <i class="fa fa-heart-o"></i>
+                  </a>
+                  <a class="action-cart" style="cursor: pointer;" (click)="agregarItemCarrito(descuento, 2)">
+                    Añadir al Carrito
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<app-footer></app-footer>

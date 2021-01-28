@@ -1,0 +1,38 @@
+<app-top-bar></app-top-bar>
+<div class="breadcrumb-area gray-bg-7">
+  <div class="container">
+    <div class="breadcrumb-content">
+      <ul>
+        <li><a href="/">Inicio</a></li>
+        <li class="text-red">Marcas </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="team-area pt-75 pb-50"
+  style="background-image: url('../../../../assets/img/fondo2.jpg'); width: 100%; background-position: center; background-repeat: no-repeat; background-size: cover;">
+  <div class="container">
+    <div class="text-center mb-40">
+      <h4 class="section-title-about">Marcas</h4>
+    </div>
+    <div class="row">
+      <div *ngFor="let marca of lstMarcas" class="col-lg-3 col-md-6 col-sm-6" style="cursor: pointer;" (click)="verMarcaProductos(marca.marcaNombre)">
+        <div class="team-wrapper mb-30">
+          <div class="team-img"
+            style="border: 1px solid #ddd; height: 200px !important; background-color: #ffffff !important; line-height: 210px;">
+            <a>
+              <img [src]="urls.conexionImagenes + '/' + marca.marcaFoto" style="width: 100% !important;">
+            </a>
+            <div class="team-action">
+              
+            </div>
+          </div>
+          <div class="team-content text-center" style="background-color: #ffffff !important;">
+            <h4>{{ marca.marcaNombre }}</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

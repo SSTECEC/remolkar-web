@@ -1,0 +1,127 @@
+
+.wpwl-form {
+  margin: 0px !important;
+  max-width: 100% !important;
+}
+
+.wpwl-hint {
+  font-size: 14px !important;
+}
+
+.wpwl-wrapper-custom {
+  text-align: center !important;
+}
+
+div.wpwl-label,
+div.wpwl-wrapper {
+  width: 100%;
+}
+
+div.wpwl-label {
+  color: #000000  !important;
+  
+  font-size: 15px !important;
+}
+
+div.wpwl-wrapper-brand,
+div.wpwl-label-brand,
+div.wpwl-group-brand {
+  display: none  !important;
+}
+
+div.wpwl-brand {
+  border-radius: 6px 6px 6px 6px !important;
+  -moz-border-radius: 6px 6px 6px 6px !important;
+  -webkit-border-radius: 6px 6px 6px 6px !important;
+  padding-top: 7px !important;
+  padding-bottom: 7px !important;
+  padding-right: 15px !important;
+  padding-left: 15px !important;
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  height: 25px !important;
+  width: 100% !important;
+}
+  
+div.wpwl-group-expiry {
+  width: 48% !important;
+  margin-right: 2% !important;
+  display: inline-block !important;
+}
+
+div.wpwl-group-cvv {
+  width: 48% !important;
+  margin-left: 2% !important;
+  display: inline-block !important;
+}
+
+iframe.wpwl-control-cvv,
+input.wpwl-control,
+select.wpwl-wrapper-custom-installments {
+  background: transparent none repeat scroll 0 0;
+  border: 1px solid #ebebeb;
+  border-radius: 5px;
+  color: #242424;
+  height: 40px;
+  padding: 0 15px;
+  font-size: 15px !important;
+}
+
+iframe.wpwl-control-cardNumber {
+  background: transparent none repeat scroll 0 0;
+  border: 1px solid #ebebeb;
+  border-radius: 5px;
+  color: #242424;
+  height: 40px;
+  padding: 0 15px;
+  font-size: 15px !important;
+}
+
+input.wpwl-control-expiry {
+  color: #4c4c4c !important;
+}
+
+input.wpwl-control-expiry::placeholder {
+  color: #6c6c6c !important;
+}
+
+input.wpwl-control-cardHolder {
+  text-transform: uppercase;
+  color: #4c4c4c !important;
+}
+
+input.wpwl-control-cardHolder::placeholder {
+  text-transform: capitalize !important;
+  color: #6c6c6c !important;
+}
+
+button.wpwl-button-pay {
+  background-color: #df2121;
+  border: medium none;
+  border-radius: 3px;
+  color: #fff;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  padding: 17px 35px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all .3s ease 0s;
+}
+
+button.wpwl-button-pay:hover {
+  background-color: #242424 !important;
+  color: #fff !important;
+}
+
+@media screen and (max-width: 584px) {
+  div .wpwl-group-expiry {
+    width: 100% !important;
+    margin-right: 0% !important;
+  }
+
+  div.wpwl-group-cvv {
+    width: 100% !important;
+    margin-left: 0% !important;
+  }
+}

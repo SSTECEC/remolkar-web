@@ -1,0 +1,288 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="square-jelly-box" [fullScreen]="true">
+  <p style="color: white"> Cargando... </p>
+</ngx-spinner>
+
+<app-top-bar [datosCarrito]="itemsCarrito"></app-top-bar>
+<div class="breadcrumb-area gray-bg-7">
+  <div class="container">
+    <div class="breadcrumb-content">
+      <ul>
+        <li><a href="/">Inicio</a></li>
+        <li class="text-red">Compra</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="checkout-area pb-45 pt-65">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-9">
+        <div class="checkout-wrapper">
+          <div id="faq" class="panel-group">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h5 class="panel-title"><span>1.</span> <a data-toggle="collapse" data-parent="#faq" href="#payment-2"
+                    class="" aria-expanded="true">INFORMACIÓN DE FACTURACIÓN</a></h5>
+              </div>
+              <div id="payment-2" class="panel-collapse collapse show">
+                <div class="panel-body">
+                  <div class="billing-information-wrapper">
+                    <div class="row">
+                      <div class="col-lg-6 col-md-6">
+                        <div class="billing-select">
+                          <label>Tipo Identificación</label>
+                          <select name="tipoIdentificacion" [(ngModel)]="fmrDatosFacturacion.tipoIdentificacion">
+                            <option value="RUC">RUC</option>
+                            <option value="CÉDULA">CÉDULA</option>
+                            <option value="PASAPORTE">PASAPORTE</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-md-6">
+                        <div class="billing-info">
+                          <label>Identificación</label>
+                          <input type="text" name="identificacion" [(ngModel)]="fmrDatosFacturacion.identificacion"
+                            (keyup)="fmrDatosFacturacion.identificacion = generico.formatoCampo(fmrDatosFacturacion.identificacion, '0123456789', 13, 2)">
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-md-6">
+                        <div class="billing-info">
+                          <label>Nombre</label>
+                          <input type="text" name="nombre" [(ngModel)]="fmrDatosFacturacion.nombre"
+                            (keyup)="fmrDatosFacturacion.nombre = generico.formatoCampo(fmrDatosFacturacion.nombre, 'abcdefghijklmnñopqrstuvwxyzáéíóúÁÉÍÓÚABCDEFGHIJKLMNÑOPQRSTUVWXYZ ', 100, 1)">
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-md-6">
+                        <div class="billing-info">
+                          <label>Correo Electrónico</label>
+                          <input type="email" name="identificacion" [(ngModel)]="fmrDatosFacturacion.email" disabled>
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-md-6">
+                        <div class="billing-info">
+                          <label>Dirección</label>
+                          <input type="text" name="direccion" [(ngModel)]="fmrDatosFacturacion.direccion"
+                            (keyup)="fmrDatosFacturacion.direccion = generico.formatoCampo(fmrDatosFacturacion.direccion, 'abcdefghijklmnñopqrstuvwxyzáéíóúÁÉÍÓÚABCDEFGHIJKLMNÑOPQRSTUVWXYZ0123456789- ', 100, 1)">
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-md-6">
+                        <div class="billing-info">
+                          <label>Teléfono</label>
+                          <input type="text" name="telefono" [(ngModel)]="fmrDatosFacturacion.telefono"
+                            (keyup)="fmrDatosFacturacion.telefono = generico.formatoCampo(fmrDatosFacturacion.telefono, '0123456789', 10, 2)">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="billing-back-btn">
+                      <div class="billing-back">
+                      </div>
+                      <div class="billing-btn">
+                        <button type="submit" class="boton-red" (click)="informacionFacturacion()">Continuar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h5 class="panel-title"><span>2.</span> <a data-toggle="collapse" data-parent="#faq"
+                    href="{{ panelesCompra.panel2 == true ? '#payment-6': ''}}" class="collapsed"
+                    aria-expanded="true">RESUMEN DE
+                    LA COMPRA</a></h5>
+
+              </div>
+              <div id="payment-6"
+                [ngClass]="panelesCompra.panel2 == true ? 'panel-collapse collapse show': 'panel-collapse collapse'">
+                <div class="panel-body">
+                  <div class="order-review-wrapper">
+                    <div class="order-review">
+                      <div class="table-responsive">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th class="width-1">Descripción</th>
+                              <th class="width-2">Precio</th>
+                              <th class="width-3">Cantidad</th>
+                              <th class="width-4">Subtotal</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let carrito of itemsCarrito.lstCarrito">
+                              <td>
+                                <div class="o-pro-dec">
+                                  <p>{{carrito.data.nombre}}</p>
+                                </div>
+                              </td>
+                              <td>
+                                <div class="o-pro-price">
+                                  <p>$ {{ generico.formatearNumero(obtenerPrecio(carrito.data),2) }}</p>
+                                </div>
+                              </td>
+                              <td>
+                                <div class="o-pro-qty">
+                                  <p>{{ carrito.cantidad }}</p>
+                                </div>
+                              </td>
+                              <td>
+                                <div class="o-pro-subtotal">
+                                  <p>$
+                                    {{ generico.formatearNumero(obtenerTotalItem(carrito.cantidad, carrito.data),2) }}
+                                  </p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                          <tfoot>
+                            <tr>
+                              <td colspan="3">Subtotal </td>
+                              <td colspan="1">$ {{ generico.formatearNumero(valores.subtotal,2) }}</td>
+                            </tr>
+                            <tr *ngIf="data.envio == 1">
+                              <td colspan="3">Envío </td>
+                              <td colspan="1">$ 20.00</td>
+                            </tr>
+                            <tr class="tr-f">
+                              <td colspan="3">Iva</td>
+                              <td colspan="1">$ {{ generico.formatearNumero(valores.iva,2) }}</td>
+                            </tr>
+                            <tr>
+                              <td colspan="3">Total</td>
+                              <td colspan="1">$ {{ generico.formatearNumero(valores.total,2) }}</td>
+                            </tr>
+                          </tfoot>
+                        </table>
+                      </div>
+                      <div class="billing-back-btn">
+                        <span>
+                        </span>
+                        <div class="billing-btn">
+                          <button type="submit" class="boton-red" (click)="resumenCompra()">Continuar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h5 class="panel-title"><span>3.</span> <a data-toggle="collapse" data-parent="#faq"
+                    href="{{ panelesCompra.panel3 == true ? '#payment-5': ''}}" class="collapsed"
+                    aria-expanded="false">FORMAS DE PAGO</a></h5>
+              </div>
+              <div id="payment-5"
+                [ngClass]="panelesCompra.panel3 == true ? 'panel-collapse collapse show': 'panel-collapse collapse'">
+                <div class="panel-body">
+                  <div class="payment-info-wrapper">
+                    <div class="payment-info">
+                      <div class="row">
+                        <div class="col-md-12">
+
+
+                          <div class="tax-select">
+                            <select class="email s-email s-wid" name="pago" [(ngModel)]="idFormaPago"
+                              (ngModelChange)="gestionPago()">
+                              <option [value]="-1">Seleccionar Forma de Pago</option>
+                              <option *ngFor="let formas of lstFormasPago" [value]="formas.idFormaPago">
+                                {{ formas.nombre }}
+                              </option>
+                            </select>
+                          </div>
+
+                          <div *ngIf="idFormaPago == 3">
+                            <form id="formularioPago" action="{{urlRetorno}}/compras/verificacion/" class="paymentWidgets"
+                              data-brands="VISAELECTRON VISADEBIT VISA MASTERDEBIT MASTER MAESTRO DISCOVER DINERS AMEX ALIADEBIT ALIA">
+                            </form>
+                          </div>
+
+                          <div *ngIf="idFormaPago == 2">
+                            <div class="tax-select">
+                              <div>
+                                <div style="text-align: center;">
+                                  <b>Datos Cuenta</b>
+                                  <hr
+                                    style="margin: 0px; background-color: #dddddd; margin-top: 8px; margin-bottom: 8px;">
+                                </div>
+                                <span>
+                                  <b>Tipo</b><br>
+                                  {{ pago.tipoCuenta }}
+                                </span>
+                                <br>
+                                <span>
+                                  <b>Número</b><br>
+                                  {{ pago.numeroCuenta }}
+                                </span>
+                                <br>
+                                <span>
+                                  <b>Banco</b><br>
+                                  {{ pago.bancoCuenta }}
+                                </span>
+                                <br>
+                                <span>
+                                  <b>Identificación</b><br>
+                                  {{ pago.identificacionCuenta }}
+                                </span>
+                                <br>
+                                <span>
+                                  <b>Nombre</b><br>
+                                  {{ pago.nombreCuenta }}
+                                </span>
+                              </div>
+                              <br>
+                              <label>
+                                * Recibo / Comprobante
+                              </label>
+                              <input type="file" id="file" name="file" (change)="obtenerComprobante($event)">
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                    <div *ngIf="idFormaPago != 3" class="billing-back-btn">
+                      <span>
+                      </span>
+                      <div class="billing-btn">
+                        <button type="submit" class="boton-red" (click)="finalizarCompra()">Finalizar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+      <div class="col-lg-3">
+        <div class="checkout-progress">
+          <h4>PROGRESO DE COMPRA</h4>
+          <ul>
+            <li *ngIf="panelProgreso.panel1 != true"><i class="fa fa-minus-circle" style="font-size: 15.5px;"></i>&nbsp;
+              Información de facturación</li>
+            <li *ngIf="panelProgreso.panel1 == true" style="color: #df2121;"><i class="fa fa-check-circle"
+                style="font-size: 15.5px;"></i>&nbsp; Información de facturación</li>
+
+            <li *ngIf="panelProgreso.panel2 != true"><i class="fa fa-minus-circle" style="font-size: 15.5px;"></i>&nbsp;
+              Resumen de la compra</li>
+            <li *ngIf="panelProgreso.panel2 == true" style="color: #df2121;"><i class="fa fa-check-circle"
+                style="font-size: 15.5px;"></i>&nbsp; Resumen de la compra</li>
+
+            <li *ngIf="panelProgreso.panel3 != true"><i class="fa fa-minus-circle" style="font-size: 15.5px;"></i>&nbsp;
+              Formulario de pago</li>
+            <li *ngIf="panelProgreso.panel3 == true" style="color: #df2121;"><i class="fa fa-check-circle"
+                style="font-size: 15.5px;"></i>&nbsp; Formulario de pago</li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

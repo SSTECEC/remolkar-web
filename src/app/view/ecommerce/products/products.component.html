@@ -1,0 +1,247 @@
+<app-top-bar [datosCarrito]="itemsCarrito"></app-top-bar>
+<div class="breadcrumb-area gray-bg-7">
+  <div class="container">
+    <div class="breadcrumb-content">
+      <ul>
+        <li><a href="/">Inicio</a></li>
+        <li class="text-red">Productos | Tienda </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="shop-page-area pt-30 pb-65">
+  <div class="container">
+    <div class="row flex-row-reverse">
+      <div class="col-lg-9">
+        <div class="shop-topbar-wrapper">
+          <div class="shop-topbar-left">
+            <div class="grid-list-options nav view-mode">
+              <a class="active" href="#product-grid" data-view="product-grid" data-toggle="tab"><i
+                  class="fa fa-th"></i></a>
+              <a href="#product-list" data-view="product-list" data-toggle="tab"><i class="fa fa-list-ul"></i></a>
+            </div>
+            <p>Mostrando {{ lstProductos.length }} resultado/s </p>
+          </div>
+          <div class="product-sorting-wrapper">
+            <div class="product-shorting shorting-style">
+            </div>
+            <div class="product-show shorting-style">
+              <div class="pagination-style">
+                <ul>
+                  <li (click)="atras()">
+                    <a class="prev-next prev"><i class="ion-ios-arrow-left"></i> Atrás</a>
+                  </li>
+                  <li (click)="siguiente()">
+                    <a class="prev-next next">Siguiente<i class="ion-ios-arrow-right"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-content jump">
+          <div class="tab-pane active pb-20" id="product-grid">
+            <div class="row">
+              <div *ngIf="lstProductos.length == 0" class="col-12">
+                <div style="padding: 20px; border: 1px solid #E8E8E8;">
+                  Ningún producto encontrado
+                </div>
+              </div>
+              <div *ngFor="let producto of lstProductos" class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6 mb-30">
+                <div class="devita-product-2 devita-product-red mrg-inherit">
+                  <div class="product-img">
+                    <a href="/producto/{{producto.idProducto}}">
+                      <img [src]="urls.conexionImagenes + '/' + obtenerImagen(producto.imagen)"
+                        style="width: 100% !important; border: 1px solid #E8E8E8"
+                        onerror="this.onerror == null; this.src = 'https://www.remolkar.com/imagenes/productos/predeterminado.png'">
+                    </a>
+                    <span *ngIf="producto.promocion == 1" style="background-color: #ebe842 !important; color: #000000;">-{{ generico.formatearNumero(producto.descuento,0)}}%</span>
+                  </div>
+                  <div class="list-col">
+                    <div class="gridview">
+                      <div class="product-content text-center">
+                        <span>{{producto.categoriaNombre}}</span>
+                        <h4><a href="/producto/{{producto.idProducto}}">{{producto.nombre}}</a>
+                        </h4>
+
+                        <div *ngIf="producto.promocion == 1" class="product-price-wrapper">
+                          <span class="text-red">$ {{ generico.formatearNumero(producto.precioDescuento,2) }}</span>
+                          <br>
+                          <span class="product-price-old">$ {{ generico.formatearNumero(producto.precio,2) }}</span>
+                        </div>
+
+                        <div *ngIf="producto.promocion == 0" class="product-price-wrapper">
+                          <span>$ {{generico.formatearNumero(producto.precio,2)}}</span>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+
+
+                      </div>
+                      <div class="product-action-wrapper-2 text-center">
+                        <div class="product-rating">
+                          <i class="ion-android-star-outline theme-star"></i>
+                          <i class="ion-android-star-outline theme-star"></i>
+                          <i class="ion-android-star-outline theme-star"></i>
+                          <i class="ion-android-star-outline theme-star"></i>
+                          <i class="ion-android-star-outline theme-star"></i>
+                        </div>
+                        
+                        <div class="product-action">
+                          <a class="same-action" title="Wishlist" style="cursor: pointer;"
+                            (click)="favorito.agregarItemFavorito(producto.idProducto, producto)">
+                            <i class="fa fa-heart-o"></i>
+                          </a>
+                          <a class="action-cart" style="cursor: pointer;" (click)="agregarItemCarrito(producto)">
+                            Añadir al Carrito
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-pane" id="product-list">
+            <div class="row">
+              <div *ngFor="let producto of lstProductos" class="col-lg-12">
+                <div class="product-list-wrapper  devita-product-red shop-border mb-40 pb-40">
+                  <div class="product-img">
+                    <a href="/producto/{{producto.idProducto}}">
+                      <img [src]="urls.conexionImagenes + '/' + obtenerImagen(producto.imagen)"
+                        style="width: 100% !important; border: 1px solid #E8E8E8"
+                        onerror="this.onerror == null; this.src = 'https://www.remolkar.com/imagenes/productos/predeterminado.png'">
+                    </a>
+                    <span *ngIf="producto.promocion == 1">-{{ generico.formatearNumero(producto.descuento,0)}}%</span>
+                  </div>
+                  <div class="product-list-content">
+                    <span>Llantas</span>
+                    <h4><a href="/producto/{{producto.idProducto}}">{{producto.nombre}}</a></h4>
+                    <div class="product-rating">
+                      <i class="ion-android-star-outline theme-star"></i>
+                      <i class="ion-android-star-outline theme-star"></i>
+                      <i class="ion-android-star-outline theme-star"></i>
+                      <i class="ion-android-star-outline theme-star"></i>
+                      <i class="ion-android-star-outline theme-star"></i>
+                    </div>
+
+                    <div *ngIf="producto.promocion == 1" class="product-price-wrapper">
+                      <span class="text-red">$ {{ generico.formatearNumero(producto.precioDescuento,2) }}</span>
+                      <br>
+                      <span class="product-price-old">$ {{ generico.formatearNumero(producto.precio,2) }}</span>
+                    </div>
+
+                    <div *ngIf="producto.promocion == 0" class="product-price-wrapper">
+                      <span>$ {{generico.formatearNumero(producto.precio,2)}}</span>
+                    </div>
+
+                    
+                    <div class="product-action">
+                      <a class="action-cart" style="cursor: pointer;" (click)="agregarItemCarrito(producto)"> Añadir al
+                        Carrito </a>
+                      <a class="same-action" style="cursor: pointer;"
+                        (click)="favorito.agregarItemFavorito(producto.idProducto, producto)" title="Wishlist">
+                        <i class="fa fa-heart-o"></i>
+                      </a>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="lstProductos.length != 0" class="pagination-total-pages">
+            <div class="pagination-style">
+              <ul>
+                <li (click)="atras()"><a class="prev-next prev" ><i class="ion-ios-arrow-left"></i> Atrás</a></li>
+                <li (click)="siguiente()"><a class="prev-next next">Siguiente<i class="ion-ios-arrow-right"></i> </a>
+                </li>
+              </ul>
+            </div>
+            <div class="total-pages">
+              <p>Mostrando {{ lstProductos.length }} resultado/s</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="shop-sidebar-wrapper gray-bg-7 mrg-top-md mrg-top-sm" style="background-color: #E8E8E8">
+          <div class="shop-widget single-product-red">
+            <h4 class="shop-sidebar-title">Categorias</h4>
+            <div class="shop-catigory">
+              <ul id="faq">
+
+                <ng-container>
+                  <li *ngFor="let categoria of lstCategorias">
+
+                    <a *ngIf="categoria.nombre == 'Llantas'" data-toggle="collapse" data-parent="#faq"
+                      href="#shop-catigory-1" class="click">
+                      {{categoria.nombre}} | RIN <i class="ion-ios-arrow-down"></i>
+                    </a>
+                    <ul *ngIf="categoria.nombre == 'Llantas'" id="shop-catigory-1" class="panel-collapse collapse">
+                      <li *ngFor="let rin of lstRin" class="click" (click)="filtrar(2, rin)"><a>RIN {{ rin }}</a></li>
+                    </ul>
+
+                    <a *ngIf="categoria.nombre != 'Llantas'" class="click"
+                      (click)="filtrar(1, categoria.idCategoria)">{{categoria.nombre}}</a>
+
+                  </li>
+                </ng-container>
+
+              </ul>
+            </div>
+          </div>
+          <div class="shop-price-filter mt-40 shop-sidebar-border pt-35">
+            <h4 class="shop-sidebar-title">Filtrar por Precio</h4>
+            <div class="price_filter mt-25">
+              <span>Rango: $ {{ generico.formatearNumero(rangoPrecios.minimo,2) }} - $
+                {{ generico.formatearNumero(rangoPrecios.maximo,2) }} </span>
+
+              <div class="custom-slider">
+                <ng5-slider [(value)]="rangoPrecios.minimo" [(highValue)]="rangoPrecios.maximo"
+                  [options]="opcionesRangoPrecios"></ng5-slider>
+              </div>
+
+              <div class="price_slider_amount">
+                <button type="button" (click)="filtrar(3, 0)">Filtrar</button>
+              </div>
+            </div>
+          </div>
+          <div class="shop-widget mt-40 shop-sidebar-border pt-35">
+            <h4 class="shop-sidebar-title">Marcas</h4>
+            <div class="sidebar-list-style mt-20">
+              <ul>
+                <div>
+                  <li *ngFor="let marca of lstMarcas" id="toppings">
+                    <input type="checkbox" name="marcas" value="{{ marca.idMarca }}"
+                      (click)="filtrar(4, marca.idMarca)"><a>{{marca.marcaNombre}} </a>
+                  </li>
+                </div>
+
+              </ul>
+            </div>
+          </div>
+          <div class="shop-widget mt-40 shop-sidebar-border pt-35">
+            <h4 class="shop-sidebar-title">Tags</h4>
+            <div class="shop-tags mt-25">
+              <ul>
+                <li><a href="#">Llantas</a></li>
+                <li><a href="#">Audio</a></li>
+                <li><a href="#">Accesorios</a></li>
+                <li><a href="#">Asistencia Vial</a></li>
+                <li><a href="#">Lubricantes</a></li>
+                <li><a href="#">Remolkar</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

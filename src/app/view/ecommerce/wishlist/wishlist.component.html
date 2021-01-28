@@ -1,0 +1,81 @@
+<app-top-bar [datosCarrito]="itemsCarrito"></app-top-bar>
+<div class="breadcrumb-area gray-bg-7">
+  <div class="container">
+    <div class="breadcrumb-content">
+      <ul>
+        <li><a href="/">Inicio</a></li>
+        <li class="text-red">Favoritos</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="cart-main-area pt-60 pb-65">
+  <div class="container">
+    <h3 class="page-title">Artículos Favoritos</h3>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+        <div>
+          <div class="table-content table-responsive">
+            <table style="width: 100%;">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Nombre</th>
+                  <th>Precio Unitario</th>
+                  <th>Carrito</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngIf="lstFavoritos.length == 0">
+                  <td colspan="5">
+                    No existen productos favoritos.
+                  </td>
+                </tr>
+                <tr *ngFor="let carrito of lstFavoritos">
+                  <td class="product-thumbnail">
+                    <a href="/producto/{{carrito.data.idProducto}}">
+                      <img [src]="urls.conexionImagenes + '/' + obtenerImagen(carrito.data.imagen)"
+                        style="width: 80% !important;">
+                    </a>
+                  </td>
+                  <td class="product-name"><a href="/producto/{{carrito.data.idProducto}}">{{carrito.data.nombre}}</a>
+                  </td>
+                  <td class="product-price-cart"><span class="amount">$
+                      {{ generico.formatearNumero(obtenerPrecio(carrito.data),2) }}</span></td>
+                  <td class="product-quantity">
+                    <div class="deals-btn">
+                      <a class="btn-style-2" style="cursor: pointer; color: white;"
+                        (click)="agregarItemCarrito(carrito.data)">
+                        Agregar
+                      </a>
+                    </div>
+                  </td>
+
+                  <td class="product-remove">
+                    <a style="cursor: pointer;" (click)="eliminarItemFavorito(carrito.data.idProducto)"><i
+                        class="fa fa-times"></i></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="cart-shiping-update-wrapper">
+                <div class="cart-shiping-update">
+                  <a href="/productos" class="boton-red">Continuar Comprando</a>
+                </div>
+                <div class="cart-clear">
+                  <a style="cursor: pointer;" class="boton-red" (click)="eliminarFavoritos()">Vaciar Favoritos</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>
