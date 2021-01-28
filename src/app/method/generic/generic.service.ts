@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import Swal from 'sweetalert2'
+
 
 @Injectable()
 export class GenericService {
@@ -155,6 +157,18 @@ export class GenericService {
     }
 
     return estado;
+  }
+
+
+  public alerta(){
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      html: '<span>Mensaje enviado a <b>REMOLKAR</b> exiosamente.</span>',
+      showConfirmButton: false,
+      timer: 1500
+    })
+    
   }
 
 }

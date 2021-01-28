@@ -12,6 +12,13 @@ export class ContactComponent implements OnInit {
   dtsEmpresa: any = { "idEmpresa": 0, "tipoIdentificacion": "", "identificacion": "", "nombre": "", "email": "", "logo": "", "acerca": "", "idHorario": 0, "apertura": "", "cierre": "", "descripcion": "", "idSucursal": 0, "nombreSucursal": "", "telefonoSucursal": "", "direccionSucursal": "", "latitudSucursal": "", "longitudSucursal": "", "provinciaSucursal": "", "principalSucursal": 0 };
 
 
+  formEmail : any = {
+    nombre : '',
+    correo : '',
+    asunto : '',
+    mensaje : ''
+  }; 
+
   constructor(public conexion: ApiService, public generico: GenericService) { }
 
   ngOnInit(): void {
@@ -30,5 +37,30 @@ export class ContactComponent implements OnInit {
       }
     );
   }
+
+  public enviarMail(){
+    var datos : any = {
+      nombre : this.formEmail.nombre,
+      correo : this.formEmail.correo,
+      asunto : this.formEmail.asunto,
+      mensaje : this.formEmail.mensaje
+    }
+
+    console.log(datos);
+
+    this.conexion.post("enviarEmail","",datos).subscribe(
+      (res: any) => {
+        if(res){
+          console.log(res);
+          this.generico.alerta();
+        }
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
+
+
 
 }

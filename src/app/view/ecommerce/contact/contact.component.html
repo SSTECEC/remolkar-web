@@ -44,49 +44,51 @@
                             <div class="contact-information mrg-top-sm">
                                 <h4>Teléfonos</h4>
                                 <p>
-                                    <a href="#">(593) {{ dtsEmpresa.telefonoSucursal }}</a>
-                                    <a href="#">(593) {{ 992943174 }}</a>
+                                    <a href="tel:+0992943174">Teléfono Grúas Guayaquil: <br> (593) 992943174</a><br>    
+                                    <a href="tel:+0998397303">Teléfono Llantas y Grúas: <br> (593) 998397303</a><br>
+                                    <a href="tel:+0979009952">Teléfono Repuestos: <br> (593) 979009952</a> 
                                 </p>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-4">
                             <div class="contact-information mrg-top-sm">
-                                <h4>Web</h4>
-                                <p>
-                                    <a href="#">{{ dtsEmpresa.email }}</a>
-                                    <a href="/">www.remolkar.com</a>
+                                <h4>Email</h4>
+                                <p>                     
+                                    <a href="mailto:ventas@remolkar.com">Email Ventas: ventas@remolkar.com</a><br>
+                                    <a href="mailto:gruas1@remolkar.com">Email Grúas: gruas1@remolkar.com</a><br>
+                                     <a href="mailto:repuestos@remolkar.com">Email Repuestos: repuestos@remolkar.com</a>
                                 </p>
                             </div>
                         </div>
                     </div>
                     <div id="contact-form-tab" class="tab-pane fade row d-flex">
                         <div class="col">
-                            <form id="contact-form" action="assets/mail.php" method="post">
+                            
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="contact-form-style mb-20">
-                                            <input name="name" placeholder="Nombre" type="text">
+                                            <input type="text" [(ngModel)]="formEmail.nombre" name="formEmail.nombre" placeholder="Nombre">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="contact-form-style mb-20">
-                                            <input name="email" placeholder="Correo Electrónico" type="email">
+                                            <input type="email" [(ngModel)]="formEmail.correo" name="formEmail.correo" placeholder="Correo Electrónico">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="contact-form-style mb-20">
-                                            <input name="subject" placeholder="Asunto" type="text">
+                                            <input type="text" [(ngModel)]="formEmail.asunto" name="formEmail.asunto" placeholder="Asunto">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="contact-form-style">
-                                            <textarea name="message" placeholder="Mensaje"></textarea>
-                                            <button class="submit" type="submit"
+                                            <textarea [(ngModel)]="formEmail.mensaje" name="formEmail.mensaje" placeholder="Mensaje"></textarea>
+                                            <button class="submit" (click)="enviarMail()" 
                                                 style="background-color: #df2121; color: #fff;">Enviar Mensaje</button>
                                         </div>
                                     </div>
                                 </div>
-                            </form>
+
                             <p class="form-messege"></p>
                         </div>
                     </div>
