@@ -67,7 +67,8 @@
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="contact-form-style mb-20">
-                                            <input type="text" [(ngModel)]="formEmail.nombre" name="formEmail.nombre" placeholder="Nombre">
+                                            <input type="text" [(ngModel)]="formEmail.nombre" name="formEmail.nombre" placeholder="Nombre"
+                                            (keyup)="formEmail.nombre = generico.formatoCampo(formEmail.nombre, 'abcdefghijklmnñopqrstuvwxyzáéíóúÁÉÍÓÚABCDEFGHIJKLMNÑOPQRSTUVWXYZ-. ', 100, 1)">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">

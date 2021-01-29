@@ -39,26 +39,38 @@ export class ContactComponent implements OnInit {
   }
 
   public enviarMail(){
-    var datos : any = {
-      nombre : this.formEmail.nombre,
-      correo : this.formEmail.correo,
-      asunto : this.formEmail.asunto,
-      mensaje : this.formEmail.mensaje
+
+
+    if( this.generico.validarFormulario( this.formEmail)){
+
+      var datos : any = {
+        nombre : this.formEmail.nombre,
+        correo : this.formEmail.correo,
+        asunto : this.formEmail.asunto,
+        mensaje : this.formEmail.mensaje
+      }
+  
+      console.log(datos);
+  
+      this.conexion.post("enviarEmail","",datos).subscribe(
+        (res: any) => {
+          if(res){
+            console.log(res);
+            this.generico.alerta();
+          }
+        },
+        err => {
+          console.log(err);
+        }
+      );
+
+
     }
 
-    console.log(datos);
 
-    this.conexion.post("enviarEmail","",datos).subscribe(
-      (res: any) => {
-        if(res){
-          console.log(res);
-          this.generico.alerta();
-        }
-      },
-      err => {
-        console.log(err);
-      }
-    );
+
+
+    
   }
 
 

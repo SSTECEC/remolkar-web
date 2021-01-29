@@ -159,7 +159,6 @@ export class GenericService {
     return estado;
   }
 
-
   public alerta(){
     Swal.fire({
       position: 'top-end',
@@ -170,5 +169,45 @@ export class GenericService {
     })
     
   }
+
+  public validarFormulario(formulario : any){
+    var validacion = true;
+    if (formulario.nombre == '') {
+      validacion = false;
+      this.showAlert('Alerta', 'El campo nombre es obligatorio' , 'error' );
+    } else if(this.correoElectronico(formulario.correo)){
+      validacion = false;
+      this.showAlert('Alerta', 'El email ingresado es incorrecto' , 'error' );
+    } else if(formulario.correo == ''){
+      validacion = false;
+      this.showAlert('Alerta', 'El campo email es obligatorio' , 'error' );
+    } else if(formulario.asunto == ''){
+      validacion = false;
+      this.showAlert('Alerta', 'El campo asunto es obligatorio' , 'error' );
+    } else if(formulario.mensaje == ''){
+        validacion = false;
+        this.showAlert('Alerta', 'El campo mensaje es obligatorio' , 'error' );         
+    } else {
+      validacion = true;
+    }
+    return validacion;
+  }
+
+  public showAlert(titulo:any, texto:any, tipo:any) {
+    Swal.fire({
+      title: titulo,
+      text: texto,
+      icon : tipo
+    });
+  }
+
+  public correoElectronico(value: any) {
+    if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/.test(value)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 
 }
