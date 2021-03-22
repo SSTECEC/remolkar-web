@@ -17,11 +17,11 @@
 <div class="checkout-area pb-45 pt-65">
   <div class="container">
     <div class="row">
-      <div class="col-md-12" style="text-align: center;">
+      <div *ngIf="estadoPago" class="col-md-12" style="text-align: center;">
         <img src="../../../../assets/img/check.png" alt="" width="110"><br><br>
         <b style="font-size: 18px;">Pago Exitoso</b>
       </div>
-      <div class="col-md-12" style="text-align: center;">
+      <div *ngIf="!estadoPago" class="col-md-12" style="text-align: center;">
         <img src="../../../../assets/img/cancel.png" alt="" width="110"><br><br>
         <b style="font-size: 18px;">Pago Rechazado</b>
       </div>

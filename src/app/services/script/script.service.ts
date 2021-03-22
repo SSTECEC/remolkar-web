@@ -24,10 +24,7 @@ export class ScriptService {
     console.log(environment.conexionDatafast + id);
     this.ScriptStore = [
       { name: 'checkoutId-datafast', src: environment.conexionDatafast + id },
-      { name: 'card-datafast-3-6-9-12', src: 'assets/card-datafast/card-datafast-3-6-9-12.js' },
-      { name: 'card-datafast-corriente', src: 'assets/card-datafast/card-datafast-corriente.js' },
-      { name: 'card-datafast-especial', src: 'assets/card-datafast/card-datafast-especial.js' },
-      { name: 'card-datafast-gracia', src: 'assets/card-datafast/card-datafast-gracia.js' }
+      { name: 'card-datafast', src: 'assets/card-datafast/card-datafast.js' }
     ];
 
     this.ScriptStore.forEach((script: any) => {

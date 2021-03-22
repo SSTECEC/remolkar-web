@@ -60,12 +60,16 @@ export class CheckoutComponent implements OnInit {
   comprobante: any;
   img: any;
   urlRetorno = this.urls.conexionVista;
+  tipoTarjeta = 0;
+  tipoCredito = 0;
+  banco = 0;
 
   constructor(private router: ActivatedRoute, public generico: GenericService, public conexion: ApiService, public cart: CartService, private toastr: ToastrService, public session: SessionService, private scripts: ScriptService, private _renderer2: Renderer2,
     @Inject(DOCUMENT) private _document: Document, private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
     this.usuario = this.session.obtenerDatos();
+    console.log(this.usuario)
     this.fmrDatosFacturacion = this.usuario.resultado;
     this.data = JSON.parse(atob(this.router.snapshot.params.data));
 
@@ -136,22 +140,8 @@ export class CheckoutComponent implements OnInit {
     this.panelesCompra.panel3 = true;
   }
 
-  public cargarScriptFormualrioDatafast() {
-    const s = this._renderer2.createElement('script');
-    s.type = 'text/javascript';
-    s.src = this.url;
-    this._renderer2.appendChild(this._document.body, s);
-    this.cargarScriptDiferidosDatafast();
-  }
-
-  public cargarScriptDiferidosDatafast() {
-    const s = this._renderer2.createElement('script');
-    s.type = 'text/javascript';
-    s.src = "assets/card-datafast/card-datafast-3-6-9-12.js";
-    this._renderer2.appendChild(this._document.body, s);
-  }
-
   public generarCheckoutId() {
+
     var datos = {
       subtotal: this.generico.redondear(this.valores.subtotal),
       iva: this.generico.redondear(this.valores.iva),
@@ -159,30 +149,127 @@ export class CheckoutComponent implements OnInit {
       primerNombre: "",
       segundoNombre: "",
       apellido: this.fmrDatosFacturacion.nombre,
-      idCliente: this.fmrDatosFacturacion.idCliente + "" + this.fmrDatosFacturacion.idUsuario + "" + this.fmrDatosFacturacion.idPersona + this.generico.obtenerHora(""),
+      idCliente: this.fmrDatosFacturacion.idCliente,
       idTransaccion: this.fmrDatosFacturacion.idCliente + "" + this.fmrDatosFacturacion.idUsuario + "" + this.fmrDatosFacturacion.idPersona + this.generico.obtenerHora(""),
       email: this.fmrDatosFacturacion.email,
       identificacion: this.fmrDatosFacturacion.identificacion,
       nombreProducto: "LOTE PRODUCTOS " + this.fmrDatosFacturacion.idCliente + this.fmrDatosFacturacion.idUsuario + this.fmrDatosFacturacion.idPersona,
-      telefono: this.fmrDatosFacturacion.telefono
+      telefono: this.fmrDatosFacturacion.telefono,
+      direccion: this.fmrDatosFacturacion.direccion,
     };
 
     console.log(datos);
-
+    this.spinner.show();
     this.conexion.post("obtenerChekoutId", this.usuario.token, datos).subscribe(
       (res: any) => {
+        this.spinner.hide();
         console.log(res.resultado);
         var resultado = res.resultado;
         this.checkoutid = resultado.id;
         this.panelesCompra.panel3 = true;
         this.url = environment.conexionDatafast + this.checkoutid;
-        this.cargarScriptFormualrioDatafast();
+        this.scripts.inicializarScriptsDatafast(this.checkoutid);
+        this.cargarScriptFormularioDatafast(this.checkoutid);
+
       },
       err => {
+        this.spinner.hide();
         this.toastr.warning("Error al generar el formulario de pago, intente nuevamente.", "Formulario Pago");
         console.log(err);
       }
     );
+  }
+
+  public cargarScriptFormularioDatafast(checkoutId) {
+    this.removerScriptsVarios();
+    this.scripts.removerScriptsCss(this.urls.conexionDatafast + checkoutId, "js");
+    this.scripts.removerScriptsCss("card-datafast.js", "js");
+
+    this.scripts.cargarScriptsDinamicamente('checkoutId-datafast', 'card-datafast').then(data => {
+
+      setTimeout(() => {
+
+        $("input[name='card.holder']").val(this.fmrDatosFacturacion.nombre);
+        console.log(this.tipoTarjeta)
+        if (this.tipoTarjeta == 1) {
+          $("#tipoCredito").empty();
+          $("#tipoCredito").append('<option value="00">Corriente</option>');
+          $("#tipoCredito").val("00");
+
+          $("#diferidos").empty();
+          $("#diferidos").append('<option value="0">Corriente</option>');
+          $("#diferidos").val("0");
+        } else if (this.tipoTarjeta == 2) {
+
+          if (this.banco == 5) {
+            $("#tipoCredito").empty();
+            $("#tipoCredito").append('<option value="00">Corriente</option>');
+            $("#tipoCredito").val("00");
+
+            $("#diferidos").empty();
+            $("#diferidos").append('<option value="0">Corriente</option>');
+            $("#diferidos").val("0");
+          } else {
+
+            $("#tipoCredito").empty();
+            var tipo = '<option value="-1"></option>' + '<option value="00">Corriente</option>' + '<option value="02">Diferido Con Intereses</option>' + '<option value="03">Diferido Sin Intereses</option>';
+            $("#tipoCredito").append(tipo);
+
+            $("#tipoCredito").change(function () {
+
+              if ($("#tipoCredito").val() == "03") {
+                $("#diferidos").empty();
+                var diferidos =
+                  '<option value="3">3 Meses Sin Intereses</option>' +
+                  '<option value="6">6 Meses Sin Intereses</option>';
+                $("#diferidos").append(diferidos);
+              } else if ($("#tipoCredito").val() == "02") {
+                $("#diferidos").empty();
+                var diferidos =
+                  '<option value="3">3 Meses Con Intereses</option>' +
+                  '<option value="6">6 Meses Con Intereses</option>' +
+                  '<option value="9">9 Meses Con Intereses</option>' +
+                  '<option value="12">12 Meses Con Intereses</option>';
+                $("#diferidos").append(diferidos);
+              } else {
+                $("#diferidos").empty();
+                $("#diferidos").append('<option value="0">Corriente</option>');
+                $("#diferidos").val("0");
+              }
+
+            });
+          }
+
+
+        }
+
+
+        /* $("#token").prop("checked", true);
+         $("#diferidos").change(function () {
+ 
+           console.log($("#tipoCredito").val());
+ 
+         });*/
+      }, 5000);
+    }).catch(error => console.log(error));
+
+  }
+
+  public removerScriptsVarios() {
+    this.scripts.removerScriptsCss("https://test.oppwa.com/v1/static/f23b5b6541ad0e05a4b39d836d8eab2b/js/static.min.js", "js");
+    this.scripts.removerScriptsCss("https://ci-mpsnare.iovation.com/snare.js", "js");
+    this.scripts.removerScriptsCss("https://ci-mpsnare.iovation.com/script/logo.js", "js");
+    $("#loadDeviceId").remove();
+  }
+
+  public verificarTipoTarjeta() {
+    if (this.tipoTarjeta == 1) {
+      this.generarCheckoutId();
+    }
+  }
+
+  public verificarBanco() {
+    this.generarCheckoutId();
   }
 
   public obtenerComprobante(ev) {
@@ -227,6 +314,7 @@ export class CheckoutComponent implements OnInit {
         console.log(err);
       }
     );
+
   }
 
   public gestionFactura(path, idDetallePago) {
@@ -349,13 +437,17 @@ export class CheckoutComponent implements OnInit {
   public gestionPago() {
     console.log(this.idFormaPago);
     if (this.idFormaPago == 3) {
-      this.generarCheckoutId();
+      //this.generarCheckoutId();
     }
     for (let pago of this.lstFormasPago) {
       if (pago.idFormaPago == this.idFormaPago) {
         this.pago = pago;
       }
     }
+  }
+
+  public visualizarBoton() {
+    this.generarCheckoutId();
   }
 
 }

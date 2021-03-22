@@ -182,7 +182,7 @@
                       <div class="row">
                         <div class="col-md-12">
 
-
+                          <b>Forma de Pago</b>
                           <div class="tax-select">
                             <select class="email s-email s-wid" name="pago" [(ngModel)]="idFormaPago"
                               (ngModelChange)="gestionPago()">
@@ -194,9 +194,38 @@
                           </div>
 
                           <div *ngIf="idFormaPago == 3">
-                            <form id="formularioPago" action="{{urlRetorno}}/compras/verificacion/" class="paymentWidgets"
+
+                            <b>Tipo Tarjeta</b>
+                            <div class="tax-select">
+                              <select class="email s-email s-wid" name="pago" [(ngModel)]="tipoTarjeta" (ngModelChange)="verificarTipoTarjeta()">
+                                <option [value]="1">DÉBITO</option>
+                                <option [value]="2">CRÉDITO</option>
+                              </select>
+                            </div>
+                            
+                            <b *ngIf="tipoTarjeta == 2">Banco</b>
+                            <div *ngIf="tipoTarjeta == 2" class="tax-select">
+                              <select class="email s-email s-wid" name="pago" [(ngModel)]="banco" (ngModelChange)="verificarBanco()">
+                                <option [value]="1">BANCO GUAYAQUIL</option>
+                                <option [value]="2">BANCO PACÍFICO</option>
+                                <option [value]="3">DINERS CLUB</option>
+                                <option [value]="4">BANCO PICHINCHA</option>
+                                <option [value]="5">OTROS</option>
+                              </select>
+                            </div>
+
+                            <br>
+
+                            <form id="formularioPago" action="{{urlRetorno}}/compras/verificacion/"
+                              class="paymentWidgets"
                               data-brands="VISAELECTRON VISADEBIT VISA MASTERDEBIT MASTER MAESTRO DISCOVER DINERS AMEX ALIADEBIT ALIA">
                             </form>
+                            <br>
+                            <div style="text-align: center;">
+                              <img src="https://www.datafast.com.ec/images/verified.png" style="display:block;margin:0 auto; width: 70%;">
+                            </div>
+                            
+
                           </div>
 
                           <div *ngIf="idFormaPago == 2">

@@ -48,7 +48,7 @@ export class CheckoutVerifyComponent implements OnInit {
     console.log(datos.queryParams["resourcePath"]);
     console.log(datos)
 
-    this.verCarrito();
+    //this.verCarrito();
     this.obtenerResultado();
   }
 
@@ -66,8 +66,7 @@ export class CheckoutVerifyComponent implements OnInit {
         this.resultadoPago = res.resultado;
         this.estadoPago = this.obtenerEstadoPago();
         console.log(this.estadoPago);
-
-        //this.cart.eliminarCarrito();
+        this.gestionDetallePago("TARJETA DE CREDITO", "");
         //800.120.100
         //200.300.404
       },
@@ -82,29 +81,29 @@ export class CheckoutVerifyComponent implements OnInit {
   public gestionDetallePago(tipo, path) {
 
     var detallePago = {
-      identificador: 1,
+      identificador: 2,
       idDetallePago: 0,
       tipo: tipo,
       ruta: path,
       estado: 1,
-      id: '',
-      paymentType: '',
-      paymentBrand: '',
-      merchantTransactionId: '',
-      code_: '',
-      description: '',
-      ReferenceNbr: '',
-      AcquirerResponse: '',
-      ExtendedDescription: '',
-      bin: '',
-      binCountry: '',
-      last4Digits: '',
-      holder: '',
-      expiryMonth: '',
-      expiryYear: '',
-      merchantCustomerId: '',
-      recurring: '',
-      trama: ''
+      id: this.resultadoPago.id,
+      paymentType: this.resultadoPago.paymentType,
+      paymentBrand: this.resultadoPago.paymentBrand,
+      merchantTransactionId: this.resultadoPago.merchantTransactionId,
+      code_: this.resultadoPago.result.code,
+      description: this.resultadoPago.result.description,
+      ReferenceNbr: this.resultadoPago.resultDetails.ReferenceNbr,
+      AcquirerResponse: this.resultadoPago.resultDetails.AcquirerResponse,
+      ExtendedDescription: this.resultadoPago.resultDetails.ExtendedDescription,
+      bin: this.resultadoPago.card.bin,
+      binCountry:  this.resultadoPago.card.binCountry,
+      last4Digits:  this.resultadoPago.card.last4Digits,
+      holder:  this.resultadoPago.card.holder,
+      expiryMonth: this.resultadoPago.card.expiryMonth,
+      expiryYear:  this.resultadoPago.card.expiryYear,
+      merchantCustomerId: this.resultadoPago.merchantTransactionId,
+      recurring: this.resultadoPago.recurring.numberOfInstallments,
+      trama: JSON.stringify(this.resultadoPago)
     }
 
     this.conexion.post("gestionDetallePago", this.usuario.token, detallePago).subscribe(
@@ -113,7 +112,7 @@ export class CheckoutVerifyComponent implements OnInit {
         this.gestionFactura(path, resultado);
       },
       err => {
-        this.toastr.warning("Error al ingresar los detalles del apg, intente nuevamente.", "Gestión Detalle Pago");
+        this.toastr.warning("Error al ingresar los detalles del pago, intente nuevamente.", "Gestión Detalle Pago");
         console.log(err);
       }
     );
@@ -167,7 +166,7 @@ export class CheckoutVerifyComponent implements OnInit {
         var resultado = res.resultado;
         this.toastr.success("Factura Agregada Exitosamente", "Gestión Factura");
         this.cart.eliminarCarrito();
-        window.open(environment.conexionVista + "/", "_self");
+        //window.open(environment.conexionVista + "/", "_self");
       },
       err => {
         this.toastr.warning("Error al generar ingresar el detalle de la factura, intente nuevamente.", "Gestión Detalle Factura");
